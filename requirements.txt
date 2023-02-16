@@ -4,3 +4,4 @@ jupyter
 matplotlib
 pandas
 ipympl
+openpyxl

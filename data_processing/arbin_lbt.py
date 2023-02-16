@@ -4,6 +4,7 @@
 
 import numpy as np
 import pandas as pd
+import openpyxl
 
 class ArbinStep:
     """
@@ -140,8 +141,8 @@ class ArbinCell:
             Number assigned to the cell for the test.
         channel_number : int
             Channel assigned to the cell for the test.
-        cycles : list
-            List of ArbinTestCycles to that make up the test.
+        cycles : dict
+            Dictionary of ArbinTestCycles that make up the test with keys equal to the cycle number.
         """
 
         self.cell_number = cell_number
@@ -153,13 +154,18 @@ class ArbinCell:
         self.iter_index = 0
         return self
         
-    def __next__(self) -> ArbinStep:
+    def __next__(self) -> ArbinTestCycle:
         if self.iter_index < len(self.cycles):
-            step = self.cycles[self.iter_index]
+            cycle = self.cycles[self.iter_index]
             self.iter_index += 1
-            return step
+            return cycle
         else:
             raise StopIteration
+
+    def __getitem__(self, cycle_number) -> ArbinTestCycle:
+        for cycle in self.cycles:
+            if cycle.cycle_index == cycle_number:
+                return cycle
 
     def __del__(self):
         # Had to clear the cycle cache to fix a memory leak problem
@@ -197,6 +203,8 @@ class CellBuilder:
 
         Parameters
         ----------
+        cell : ArbinCell
+            Cell that the data is to be loaded to.
         file_path : str
             Path to an Arbin raw data file according to batch B6. Must be a .csv file.
         steps : dict
@@ -257,6 +265,91 @@ class CellBuilder:
                 elif STEP_INDEX not in all_step_numbers:
                     current_step_index = 0
 
+    def read_leaf_characterization_excel_data(
+        self, 
+        file_path: str, 
+        steps: dict[str, list[int]]
+        ) -> list[ArbinCell]:
+        """
+        Load Nissan Leaf initial characterization data from the init_gen1_packX excel files.
+        
+        Parameters
+        ----------
+        cell : ArbinCell
+            Cell that the data is to be loaded to.
+        file_path : str
+            Path to an Arbin raw data file according to batch B6. Must be a .csv file.
+        steps : dict
+            Keys are the step type (see ArbinStep.__init__) and values are lists of step numbers to be read
+            and stored.
+        """
+        all_step_numbers = []
+        for number_list in steps.values():
+            for number in number_list:
+                all_step_numbers.append(number)
+
+        workbook = openpyxl.load_workbook(file_path, read_only=True)
+        sheet_names = workbook.sheetnames[1:]
+        channel_numbers = [int(sheet_name.split('_')[1]) for sheet_name in sheet_names]
+
+        arbin_cells = []
+        for idx, sheet_name in enumerate(sheet_names):
+            arbin_cells.append(ArbinCell(channel_numbers[idx], channel_numbers[idx]))
+            arbin_cell = arbin_cells[idx]
+            sheet = workbook[sheet_name]
+            headers = []
+            for row_number, row in enumerate(sheet.iter_rows()):
+                column_data = []
+                for idx, column in enumerate(row):
+                    if row_number == 0:
+                        headers.append(column.value)
+                    else:
+                        column_data.append(column.value)
+                if row_number == 0:
+                    headers = self._fix_temperature_header(headers)
+                    arbin_cell.update_headers(headers)
+                else:   
+                    self._read_row(arbin_cell, column_data, all_step_numbers, steps)
+        return arbin_cells
+ 
+    def _read_row(
+        self,
+        cell: ArbinCell, 
+        column_data: list, 
+        all_step_numbers: list[int],
+        steps: dict[str, list[int]]
+        ) -> None:
+
+        if cell.cycles:
+            current_cycle_index = cell.cycles[-1].cycle_index
+            current_cycle = cell.cycles[-1]
+            if cell.cycles[-1].steps:
+                current_step_index = cell.cycles[-1].steps[-1].step_index
+                current_step = cell.cycles[-1].steps[-1]
+            else:
+                current_step_index = 0
+        else:
+            current_cycle_index = 0
+
+        STEP_INDEX = int(column_data[3])
+        CYCLE_INDEX = int(column_data[4])
+        if CYCLE_INDEX != current_cycle_index:
+            current_step_index = 0
+            current_cycle_index = CYCLE_INDEX
+            current_cycle = ArbinTestCycle(current_cycle_index)
+            cell.add_cycle(current_cycle)
+            print(f'Processing test cycle {current_cycle_index}')
+        if STEP_INDEX in all_step_numbers and STEP_INDEX != current_step_index:
+            current_step_index = STEP_INDEX
+            current_step_type = self._get_step_type(current_step_index, steps)
+            current_step = ArbinStep(current_step_index, current_step_type)
+            self._add_data_to_new_step(current_step, cell.headers, column_data)
+            current_cycle.add_step(current_step)
+        elif STEP_INDEX in all_step_numbers and STEP_INDEX == current_step_index:
+            self._add_data_to_current_step(current_step, cell.headers, column_data)
+        elif STEP_INDEX not in all_step_numbers:
+            current_step_index = 0
+
     def _fix_temperature_header(self, headers: list[str]) -> list:
         """
         Fix the temperature headers so that the weird symbols used to make the degree symbol
@@ -295,5 +388,15 @@ class CellBuilder:
             step[header].append(values[idx])
 
 if __name__ == '__main__':
-    print('arbin_lbt module')
+    
+    # test ead_leaf_characterization_excel_data()
+    cell_builder = CellBuilder()
+    cell = ArbinCell(1,1)
+    file_path = 'testing_data/init_gen1_pack1_5_6_7_8_Channel_5_6_7.xlsx'
+    cell_builder.read_leaf_characterization_excel_data(
+        cell,
+        file_path,
+        steps={'characterization': [5,6,9]}
+        )
+    
 

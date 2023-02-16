@@ -163,9 +163,12 @@ class ArbinCell:
             raise StopIteration
 
     def __getitem__(self, cycle_number) -> ArbinTestCycle:
-        for cycle in self.cycles:
-            if cycle.cycle_index == cycle_number:
-                return cycle
+        if isinstance(cycle_number, int):
+            for cycle in self.cycles:
+                if cycle.cycle_index == cycle_number:
+                    return cycle
+        else:
+            raise TypeError("Invalid argument type.")
 
     def __del__(self):
         # Had to clear the cycle cache to fix a memory leak problem
@@ -217,9 +220,9 @@ class CellBuilder:
             for number in number_list:
                 all_step_numbers.append(number)
 
-        current_cycle_index = 0
-        current_step_index = 0
-        current_step_type = ''
+        self.current_cycle_index = 0
+        self.current_step_index = 0
+        self.current_step_type = ''
         with open(file_path, 'rb') as data_file:
 
             # if cell has cycles in it take the last cycle index and step
@@ -227,11 +230,9 @@ class CellBuilder:
             # spread over multiple csv files are put in the correct cycle and step
             # in these objects.
             if cell.cycles:
-                current_cycle_index = cell.cycles[-1].cycle_index
-                current_cycle = cell.cycles[-1]
+                self.current_cycle_index = cell.cycles[-1].cycle_index
                 if cell.cycles[-1].steps:
-                    current_step_index = cell.cycles[-1].steps[-1].step_index
-                    current_step = cell.cycles[-1].steps[-1]
+                    self.current_step_index = cell.cycles[-1].steps[-1].step_index
 
             is_first_line = True
             for line in data_file:
@@ -246,24 +247,11 @@ class CellBuilder:
                     continue
 
                 data = line.split(',')
-                STEP_INDEX = int(data[3])
-                CYCLE_INDEX = int(data[4])
-                if CYCLE_INDEX != current_cycle_index:
-                    current_step_index = 0
-                    current_cycle_index = CYCLE_INDEX
-                    current_cycle = ArbinTestCycle(current_cycle_index)
-                    cell.add_cycle(current_cycle)
-                    print(f'Processing test cycle {current_cycle_index}')
-                if STEP_INDEX in all_step_numbers and STEP_INDEX != current_step_index:
-                    current_step_index = STEP_INDEX
-                    current_step_type = self._get_step_type(current_step_index, steps)
-                    current_step = ArbinStep(current_step_index, current_step_type)
-                    self._add_data_to_new_step(current_step, cell.headers, data)
-                    current_cycle.add_step(current_step)
-                elif STEP_INDEX in all_step_numbers and STEP_INDEX == current_step_index:
-                    self._add_data_to_current_step(current_step, cell.headers, data)
-                elif STEP_INDEX not in all_step_numbers:
-                    current_step_index = 0
+                self._read_row(cell, data, all_step_numbers, steps)
+
+            self.current_cycle_index = 0
+            self.current_step_index = 0
+            self.current_step_type = ''
 
     def read_leaf_characterization_excel_data(
         self, 
@@ -288,6 +276,10 @@ class CellBuilder:
             for number in number_list:
                 all_step_numbers.append(number)
 
+        self.current_cycle_index = 0
+        self.current_step_index = 0
+        self.current_step_type = ''
+
         workbook = openpyxl.load_workbook(file_path, read_only=True)
         sheet_names = workbook.sheetnames[1:]
         channel_numbers = [int(sheet_name.split('_')[1]) for sheet_name in sheet_names]
@@ -310,6 +302,11 @@ class CellBuilder:
                     arbin_cell.update_headers(headers)
                 else:   
                     self._read_row(arbin_cell, column_data, all_step_numbers, steps)
+            
+            self.current_cycle_index = 0
+            self.current_step_index = 0
+            self.current_step_type = ''
+        
         return arbin_cells
  
     def _read_row(
@@ -321,34 +318,28 @@ class CellBuilder:
         ) -> None:
 
         if cell.cycles:
-            current_cycle_index = cell.cycles[-1].cycle_index
             current_cycle = cell.cycles[-1]
             if cell.cycles[-1].steps:
-                current_step_index = cell.cycles[-1].steps[-1].step_index
                 current_step = cell.cycles[-1].steps[-1]
-            else:
-                current_step_index = 0
-        else:
-            current_cycle_index = 0
 
         STEP_INDEX = int(column_data[3])
         CYCLE_INDEX = int(column_data[4])
-        if CYCLE_INDEX != current_cycle_index:
-            current_step_index = 0
-            current_cycle_index = CYCLE_INDEX
-            current_cycle = ArbinTestCycle(current_cycle_index)
+        if CYCLE_INDEX != self.current_cycle_index:
+            self.current_step_index = 0
+            self.current_cycle_index = CYCLE_INDEX
+            current_cycle = ArbinTestCycle(self.current_cycle_index)
             cell.add_cycle(current_cycle)
-            print(f'Processing test cycle {current_cycle_index}')
-        if STEP_INDEX in all_step_numbers and STEP_INDEX != current_step_index:
-            current_step_index = STEP_INDEX
-            current_step_type = self._get_step_type(current_step_index, steps)
-            current_step = ArbinStep(current_step_index, current_step_type)
+            print(f'Processing test cycle {self.current_cycle_index}')
+        if STEP_INDEX in all_step_numbers and STEP_INDEX != self.current_step_index:
+            self.current_step_index = STEP_INDEX
+            self.current_step_type = self._get_step_type(self.current_step_index, steps)
+            current_step = ArbinStep(self.current_step_index, self.current_step_type)
             self._add_data_to_new_step(current_step, cell.headers, column_data)
             current_cycle.add_step(current_step)
-        elif STEP_INDEX in all_step_numbers and STEP_INDEX == current_step_index:
+        elif STEP_INDEX in all_step_numbers and STEP_INDEX == self.current_step_index:
             self._add_data_to_current_step(current_step, cell.headers, column_data)
         elif STEP_INDEX not in all_step_numbers:
-            current_step_index = 0
+            self.current_step_index = 0
 
     def _fix_temperature_header(self, headers: list[str]) -> list:
         """

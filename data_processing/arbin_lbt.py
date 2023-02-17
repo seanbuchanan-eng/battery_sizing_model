@@ -379,15 +379,6 @@ class CellBuilder:
             step[header].append(values[idx])
 
 if __name__ == '__main__':
-    
-    # test ead_leaf_characterization_excel_data()
-    cell_builder = CellBuilder()
-    cell = ArbinCell(1,1)
-    file_path = 'testing_data/init_gen1_pack1_5_6_7_8_Channel_5_6_7.xlsx'
-    cell_builder.read_leaf_characterization_excel_data(
-        cell,
-        file_path,
-        steps={'characterization': [5,6,9]}
-        )
+    print('arbin_lbt module')
     
 

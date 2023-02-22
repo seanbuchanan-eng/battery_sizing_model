@@ -5,6 +5,7 @@
 import numpy as np
 import pandas as pd
 import openpyxl
+import matplotlib.pyplot as plt
 
 class ArbinStep:
     """
@@ -61,6 +62,13 @@ class ArbinStep:
         """
         return pd.DataFrame(self.data_dict)
 
+    def plot_step_column(self, feature: str) -> plt.figure:
+        time_in_mins = np.array(self.data_dict['Step_Time(s)'])/60
+        plt.plot(time_in_mins, self.data_dict[feature], label=f'step: {self.step_index}')
+        plt.title(feature)
+        plt.xlabel('Step Time (m)')
+        plt.ylabel(feature)
+        plt.legend()
 
 class ArbinTestCycle:
     """

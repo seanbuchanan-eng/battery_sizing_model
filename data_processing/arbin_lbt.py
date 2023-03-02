@@ -65,7 +65,6 @@ class ArbinStep:
     def plot_step_column(self, feature: str) -> plt.figure:
         time_in_mins = np.array(self.data_dict['Step_Time(s)'])/60
         plt.plot(time_in_mins, self.data_dict[feature], label=f'step: {self.step_index}')
-        plt.title(feature)
         plt.xlabel('Step Time (m)')
         plt.ylabel(feature)
         plt.legend()
@@ -113,6 +112,17 @@ class ArbinTestCycle:
             return step
         else:
             raise StopIteration
+        
+    def __getitem__(self, step_number) -> list[ArbinStep]:
+        step_list = []
+        for step in self.steps:
+            if step.step_index == step_number:
+                step_list.append(step)
+        if step_list:
+            return step_list
+        else:
+            raise ValueError('No step with that step index!')
+        
 
     def __del__(self):
         # Had to clear the step cache to fix a memory leak problem
@@ -128,6 +138,27 @@ class ArbinTestCycle:
             step to be added to the cycle.
         """
         self.steps.append(step)
+    
+    def get_step(self, step_number: int) -> list[ArbinStep]:
+        """
+        Gets steps matching the chosen step number in the cycle.
+
+        Parameters
+        ----------
+        step_number : int
+            step index to be found
+
+        Returns
+        -------
+        list[ArbinStep]
+            list of steps within the cycle matching step_number.
+            Returns an empty list if there is no matches.
+        """
+        step_list = []
+        for step in self.steps:
+            if step.step_index == step_number:
+                step_list.append(step)
+        return step_list
 
 
 class ArbinCell:
@@ -197,6 +228,9 @@ class ArbinCell:
 
     def update_headers(self, headers: list) -> None:
         self.headers = headers
+
+    def get_cycle(self, cycle_number: int) -> ArbinTestCycle:
+        return self[cycle_number]
 
 
 class CellBuilder:

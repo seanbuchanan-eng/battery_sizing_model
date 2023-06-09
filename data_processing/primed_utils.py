@@ -66,6 +66,20 @@ def load_B6T10(cell_builder: CellBuilder,
                ) -> ArbinBatch:
     """
     Load the entire B6T10/B6T15 dataset.
+
+    Parameters
+    ----------
+    ``cell_builder`` \: ``CellBuilder``
+        ``CellBuilder`` used to access data reading methods.
+    ``prepath`` \: ``str``
+        path to the folder containing all battery data.
+    ``channel_numbers`` \: ``list | tuple``
+        Channel numbers to be loaded.
+    ``cell_numbers`` \: ``list | tuple``
+        Cell number of channels to be loaded. Required to be
+        in order correspondin to the channel numbers.
+    ``steps`` \: ``dict[str: list[int]]``
+        Steps to be loaded.
     """
     # list for holding processed cells
     arbin_cells = []

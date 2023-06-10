@@ -269,7 +269,8 @@ def load_B6T10_eis(T10_eis_folder, T15_eis_folder, channel_numbers, cell_numbers
 def assign_temp(eis_step: int, 
                 temp_step: int, 
                 batch: ArbinBatch,
-                default_step_idx: int=-1
+                default_step_idx: int=-1,
+                default_temp_idx: int=-1
                 ) -> None:
     for cell in batch:
         for cycle in cell:
@@ -277,7 +278,7 @@ def assign_temp(eis_step: int,
                 # assign the last temperature of the step before EIS to the eis step
                 if len(cycle[temp_step]) > 1:
                     print(f"WARNING: More than one temperature step in cycle {cycle.cycle_index}. The last step will be taken by default.")
-                temperature = cycle[temp_step][default_step_idx]['Battery_Temperature(C)'][-1]
+                temperature = cycle[temp_step][default_step_idx]['Battery_Temperature(C)'][default_temp_idx]
             except IndexError:
                 temperature = None
             try:

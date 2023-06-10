@@ -44,7 +44,7 @@ class OCVTable:
     def __init__(self) -> None:
         with open('lookup_tables/charge_ocv.pkl', 'rb') as f:
             self.charge_ocv = pickle.load(f)
-        with open('lookup_tables/charge_ocv.pkl', 'rb') as f:
+        with open('lookup_tables/discharge_ocv.pkl', 'rb') as f:
             self.discharge_ocv = pickle.load(f)
         with open('lookup_tables/soc_interp_points.pkl', 'rb') as f:
             self.x = pickle.load(f)

@@ -112,6 +112,60 @@ def load_B6T10(cell_builder: CellBuilder,
     # load cells into a batch
     return ArbinBatch(cells=arbin_cells)
 
+def load_B6T11(cell_builder: CellBuilder, 
+               prepath: str, 
+               channel_numbers: list | tuple, 
+               cell_numbers: list | tuple, 
+               steps: dict[str: list[int]]
+               ) -> ArbinBatch:
+    """
+    Load the entire B6T11/B6T16 dataset.
+
+    Parameters
+    ----------
+    ``cell_builder`` \: ``CellBuilder``
+        ``CellBuilder`` used to access data reading methods.
+    ``prepath`` \: ``str``
+        path to the folder containing all battery data.
+    ``channel_numbers`` \: ``list | tuple``
+        Channel numbers to be loaded.
+    ``cell_numbers`` \: ``list | tuple``
+        Cell number of channels to be loaded. Required to be
+        in order correspondin to the channel numbers.
+    ``steps`` \: ``dict[str: list[int]]``
+        Steps to be loaded.
+    """
+    # list for holding processed cells
+    arbin_cells = []
+
+    # loop over channel numbers
+    for channel_idx, channel in enumerate(channel_numbers):
+        print(f'Processing channel {channel}')
+
+        # append new cell to cells processed cells list
+        arbin_cells.append(ArbinCell(cell_numbers[channel_idx], channel))
+
+        # make subfolder name in raws folder
+        # two folders are needed because the tests were modified part way through
+        # hence two seperate folders contain the "different" data.
+        T11_folder_name = f'B6T11V0_6_7/Channel_{channel}/'
+        T16_folder_name = f'B6T16V0_6_7/Channel_{channel}/'
+
+        # get directory of the current folder
+        T11_directory = os.fsencode(prepath+T11_folder_name)
+        T16_directory = os.fsencode(prepath+T16_folder_name)
+
+        # sort directory into chronological order for read_B6_csv_data()
+        T10_sorted_dir = sorted(os.listdir(T11_directory), key=lambda file: int(os.fsdecode(file).split('.')[1]))
+        T15_sorted_dir = sorted(os.listdir(T16_directory), key=lambda file: int(os.fsdecode(file).split('.')[1]))
+
+        # load the files using cellbuilder
+        load_files_from_dir(cell_builder, arbin_cells, T10_sorted_dir, prepath, T11_folder_name, steps, channel_idx)
+        load_files_from_dir(cell_builder, arbin_cells, T15_sorted_dir, prepath, T16_folder_name, steps, channel_idx)
+
+    # load cells into a batch
+    return ArbinBatch(cells=arbin_cells)
+
 def assign_soh(step: int, soh_step: int, nom_cap: float, batch: ArbinBatch) -> None:
     """
     Calculate and assign the SOH to step ``step`` in an attribute named ``soh``

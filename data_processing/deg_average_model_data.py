@@ -70,9 +70,7 @@ class DOD:
                 self.soc = 1.0
             elif self.soc < 0:
                 self.soc = 0
-                # print(self.soc)
-                # print(step.step_index)
-
+                
     def get_dod(self):
         if self.dod[0] == 0:
             return self.dod[1:]
@@ -107,7 +105,7 @@ def calc_fit_factors(batch):
             if np.mean(np.abs(step["Current(A)"])/4.0) < 0.28:
                 pass
             else:
-                c_rate = np.append(c_rate, np.mean(np.abs(step["Current(A)"])/4.0))
+                c_rate = np.append(c_rate, np.abs(step["Current(A)"])/4.0)
             cycle_time = step["Test_Time(s)"][-1]/3600
 
         if not dod_cycle.get_dod():
@@ -140,13 +138,13 @@ def get_soh_dict(batch):
     return soh
 
 if __name__ == '__main__':
-    # cell_numbers = (9,10,11,12,1,2,3,4,5,6,7,8)
-    # test_number = 1015
+    cell_numbers = (9,10,11,12,1,2,3,4,5,6,7,8)
+    test_number = 1015
     # cell_numbers = (10,)
     # cell_numbers = (13,16)
     # test_number = 1217
-    cell_numbers = (14,15)
-    test_number = 1116
+    # cell_numbers = (14,15)
+    # test_number = 1116
     for cell_number in cell_numbers:
         batch = open_data_file(cell_number, test_number)
 

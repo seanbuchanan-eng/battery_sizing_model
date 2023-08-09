@@ -51,11 +51,15 @@ class OCVTable:
 
     def get_charge_ocv(self, soh, soc):
         soh = np.floor(soh * 100) / 100
+        # 0.96 because thats all the data we have available for the molicel battery
+        if soh > 0.96: soh = 0.96
         ocv = np.interp(soc, self.x, self.charge_ocv[soh])
         return ocv
     
     def get_discharge_ocv(self, soh, soc):
         soh = np.floor(soh * 100) / 100
+        # 0.96 because thats all the data we have available for the molicel battery
+        if soh > 0.96: soh = 0.96
         ocv = np.interp(soc, self.x, self.discharge_ocv[soh])
         return ocv
 
@@ -76,10 +80,10 @@ class SOCIntegrator:
         else: eff = self.charge_eff
         # if abs(I_k) < 0.01: I_k = 0
         soc_k = soc_k + (I_k * eff * timestep/3600) / nom_cap
-        if soc_k >= 1:
-            return 1
-        elif soc_k <= 0:
-            return 0
+        # if soc_k >= 1:
+        #     return 1
+        # elif soc_k <= 0:
+        #     return 0
         return soc_k
     
 class DegradationModel:
@@ -155,7 +159,35 @@ class DegradationModel:
         # charge cycles and discharge cycles have been combined
         # in increment_efc hence the / 2 here.
         return self.cycle_chg / 2
+    
+class Battery:
 
+    def __init__(self, 
+                 cell_chemistry: str,
+                 pack_capacity: float,
+                 pack_voltage: float=0,
+                ) -> None:
+        
+        self.pack_capacity = pack_capacity
+        self.pack_voltage = pack_voltage
+        if cell_chemistry.upper() == "NMC":
+            self.cell_capacity_ah = 4.0 #Ah
+            self.cell_capacity_wh = 14.7 #Wh
+            self.cell_nom_voltage = 3.6 #V
+            self.cell_max_voltage = 4.2 #V
+            self.cell_min_voltage = 2.5 #V
+            self.cell_chemistry = cell_chemistry
+
+        self.num_series = np.ceil(self.pack_voltage / self.cell_min_voltage)
+        self.num_parallel = np.ceil(self.pack_capacity / self.cell_capacity_wh)
+        
+    def get_current(self, power):
+        """
+        Calculates current from nominal voltage and input/output power.
+        Returns the current in amps
+        """
+        return power / self.num_parallel / self.cell_nom_voltage
+ 
 class BatterySimulator:
     """
     Represents a battery simulator.
@@ -165,10 +197,10 @@ class BatterySimulator:
                  ecm: ECM, 
                  ocv: OCVTable, 
                  integrator: SOCIntegrator,
-                 deg_model: DegradationModel, 
+                 deg_model: DegradationModel,
+                 battery: Battery,
                  soc: float=1, 
                  soh: float=1, 
-                 nom_cap: float=4.0,
                  ) -> None:
         self.voltage = ocv.get_discharge_ocv(soh, soc)
         self.soc = soc
@@ -178,12 +210,13 @@ class BatterySimulator:
         self.ocv = ocv
         self.integrator = integrator
         self.deg_model = deg_model
-        self.nom_cap = nom_cap
+        self.battery = battery
+        self.nom_cap = battery.cell_capacity_ah
         self.voltage_result = []
         self.soc_result = []
         self.soh_result = [soh]
 
-    def run(self, current, timestep) -> None:
+    def run(self, power, timestep) -> None:
         # soh model data
         time = 0
         total_time = 0
@@ -193,7 +226,8 @@ class BatterySimulator:
         c_rate = []
 
         # event loop
-        for I in current:
+        for p in power:
+            I = self.battery.get_current(p)
             # ECM
             if I > 0:
                 ocv = self.ocv.get_charge_ocv(self.soh, self.soc)
@@ -221,8 +255,9 @@ class BatterySimulator:
                 mean_dod.append(np.mean(self.deg_model.get_dod()))
                 # increment total cumlative time
                 total_time += time
-                # calculate current soh (need to work in backward looking window)
+                # calculate current soh
                 self.soh = self.deg_model.model(self.deg_model.get_efc(), mean_c, mean_dod, total_time, self.soh_i*100)/100
+
                 # start the next step
                 time = 0
                 c_rate = []

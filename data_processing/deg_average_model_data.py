@@ -63,7 +63,7 @@ class DOD:
             else:
                 delta_t = step["Step_Time(s)"][idx] - step["Step_Time(s)"][idx-1]
             if c < 0:
-                self.soc = self.soc + (c * delta_t / (3600 * nom_cap)) * discharge_eff
+                self.soc = self.soc + (c * delta_t / (3600 * nom_cap)) / discharge_eff
             else:
                 self.soc = self.soc + (c * delta_t / (3600 * nom_cap)) * charge_eff
             if self.soc > 1:

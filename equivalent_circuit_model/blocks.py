@@ -8,6 +8,13 @@ within a battery simulation.
 import pickle
 import numpy as np
 
+class CapacityError(ValueError):
+    
+    def __init__(self, *args: object, 
+                 message="State of charge is greater than the current state of health or less than 0.") -> None:
+        self.message = message
+        super().__init__(self.message, *args)
+
 class ECM:
     """
     Represents an equivalent circuit model.
@@ -76,7 +83,7 @@ class SOCIntegrator:
         """
         Assumes that current is constant over the sampling interval
         """
-        if I_k < 0: eff = self.discharge_eff
+        if I_k < 0: eff = 1/self.discharge_eff
         else: eff = self.charge_eff
         # if abs(I_k) < 0.01: I_k = 0
         soc_k = soc_k + (I_k * eff * timestep/3600) / nom_cap
@@ -211,6 +218,7 @@ class BatterySimulator:
         self.integrator = integrator
         self.deg_model = deg_model
         self.battery = battery
+        self.deg_model.ref_soc = self.soh/2
         self.nom_cap = battery.cell_capacity_ah
         self.voltage_result = []
         self.soc_result = []
@@ -239,12 +247,16 @@ class BatterySimulator:
             self.voltage_result.append(self.voltage)
             self.soc_result.append(self.soc)
 
+            if self.soc > self.soh or self.soc < 0:
+                raise CapacityError
+
             #SOH Model
             time += timestep/3600 # time in hours
             # increment mean c-rate
-            if np.abs(I) > 0.1: c_rate.append(np.abs(I)/4.0)
+            if np.abs(I)/self.battery.cell_capacity_ah > 0.025: 
+                c_rate.append(np.abs(I)/self.battery.cell_capacity_ah)
             # increment mean DOD
-            self.deg_model.increment_dod(prev_soc, self.soc, )
+            self.deg_model.increment_dod(prev_soc, self.soc)
             # increment efc (total cumlative)
             self.deg_model.increment_efc(prev_soc, self.soc)
 
@@ -257,7 +269,7 @@ class BatterySimulator:
                 total_time += time
                 # calculate current soh
                 self.soh = self.deg_model.model(self.deg_model.get_efc(), mean_c, mean_dod, total_time, self.soh_i*100)/100
-
+                self.deg_model.ref_soc = self.soh/2
                 # start the next step
                 time = 0
                 c_rate = []

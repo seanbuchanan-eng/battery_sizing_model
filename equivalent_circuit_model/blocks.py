@@ -39,8 +39,8 @@ class ECM:
             self.B_rc[idx,0] = 1 - np.exp(-timestep / (R[idx] * C[idx]))
 
     def step(self, I_k: float, ocv: float) -> float:
-        v_k = ocv + np.sum(self.R * self.I_rk.ravel()) + self.r0 * I_k
         self.I_rk = self.A_rc @ self.I_rk + self.B_rc * I_k
+        v_k = ocv + np.sum(self.R * self.I_rk.ravel()) + self.r0 * I_k
         return v_k
 
 class OCVTable:
@@ -171,18 +171,24 @@ class Battery:
 
     def __init__(self, 
                  cell_chemistry: str,
-                 pack_capacity: float,
+                 pack_capacity: float, #Wh
                  pack_voltage: float=0,
+                 cell_discharge_energy_eff: float=1,
+                 cell_charge_energy_eff: float=1,
                 ) -> None:
         
         self.pack_capacity = pack_capacity
         self.pack_voltage = pack_voltage
-        if cell_chemistry.upper() == "NMC":
-            self.cell_capacity_ah = 4.0 #Ah
+        self.cell_discharge_energy_eff = cell_discharge_energy_eff
+        self.cell_charge_energy_eff = cell_charge_energy_eff
+        if cell_chemistry.upper() == "NCA":
+            self.cell_capacity_ah = 4.2 #Ah
             self.cell_capacity_wh = 14.7 #Wh
             self.cell_nom_voltage = 3.6 #V
             self.cell_max_voltage = 4.2 #V
             self.cell_min_voltage = 2.5 #V
+            self.price_per_kwh = 150 #USD
+            self.capital_cost = self.pack_capacity/1e3 * self.price_per_kwh
             self.cell_chemistry = cell_chemistry
 
         self.num_series = np.ceil(self.pack_voltage / self.cell_min_voltage)
@@ -193,7 +199,9 @@ class Battery:
         Calculates current from nominal voltage and input/output power.
         Returns the current in amps
         """
-        return power / self.num_parallel / self.cell_nom_voltage
+        if power < 0: return power / self.num_parallel / self.cell_nom_voltage / self.cell_discharge_energy_eff
+
+        return power / self.num_parallel / self.cell_nom_voltage * self.cell_charge_energy_eff
  
 class BatterySimulator:
     """
@@ -221,6 +229,7 @@ class BatterySimulator:
         self.deg_model.ref_soc = self.soh/2
         self.nom_cap = battery.cell_capacity_ah
         self.voltage_result = []
+        self.current_result = []
         self.soc_result = []
         self.soh_result = [soh]
 
@@ -236,12 +245,15 @@ class BatterySimulator:
         # event loop
         for p in power:
             I = self.battery.get_current(p)
+            self.current_result.append(I)
+            # I = p
+
             # ECM
             if I > 0:
                 ocv = self.ocv.get_charge_ocv(self.soh, self.soc)
             else:
                 ocv = self.ocv.get_discharge_ocv(self.soh, self.soc)
-            self.voltage = self.ecm.step(I, ocv)
+            self.voltage = self.ecm.step(I, ocv)            
             prev_soc = self.soc
             self.soc = self.integrator.step(self.soc, timestep, I, self.nom_cap)
             self.voltage_result.append(self.voltage)
@@ -249,6 +261,12 @@ class BatterySimulator:
 
             if self.soc > self.soh or self.soc < 0:
                 raise CapacityError
+                # pass
+            
+            if self.voltage > self.battery.cell_max_voltage:
+                print(f"WARNING: Maximum voltage exceeded! Voltage = {self.voltage}")
+            elif self.voltage < self.battery.cell_min_voltage:
+                print(f"WARNING: Minimum voltage exceeded! Voltage = {self.voltage}")
 
             #SOH Model
             time += timestep/3600 # time in hours
@@ -275,18 +293,5 @@ class BatterySimulator:
                 c_rate = []
                 self.deg_model.dod = []
                 self.soh_result.append(self.soh)
-
-if __name__ == "__main__":
-    ecm = ECM(3, 1,  [1,1,1], [1,1,1], 5)
-    print(ecm.A_rc)
-    print(ecm.B_rc)
-    print(ecm.I_rk)
-    print(f"R * I_rk: {np.sum(ecm.R * ecm.I_rk)}")
-    print(ecm.A_rc @ ecm.I_rk)
-    print(ecm.B_rc * 2)
-
-    v_k = ecm.step(2, 3.75)
-    print(v_k)
-    print(ecm.I_rk)
 
 

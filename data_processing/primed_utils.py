@@ -178,7 +178,7 @@ def assign_soh(step: int, soh_step: int, nom_cap: float, batch: ArbinBatch) -> N
     ``soh_step`` \: ``int``
         Step containing the full discharge data used to calculate the soh.
     ``nom_cap`` \: ``float``
-        Nominal capacity of the battery used for the test.
+        Nominal capacity of the battery used for the test in Ah.
     ``batch`` \: ``ArbinBatch``
         Batch of cells containing the desired data.
     """
@@ -198,7 +198,39 @@ def assign_soh(step: int, soh_step: int, nom_cap: float, batch: ArbinBatch) -> N
                 continue
             for cycle_step in cycle[step]:
                 cycle_step.soh = soh
-            
+
+def assign_soe(step: int, soe_step: int, nom_e_cap: float, batch: ArbinBatch) -> None:
+    """
+    Calculate and assign the SOE to step ``step`` in an attribute named ``soe``
+    for all cells in ``batch``.
+
+    Parameters
+    ----------
+    ``step`` \: ``int``
+        Step number to have soe added to
+    ``soe_step`` \: ``int``
+        Step containing the full discharge data used to calculate the soe.
+    ``nom_e_cap`` \: ``float``
+        Nominal energy capacity of the battery used for the test in Wh.
+    ``batch`` \: ``ArbinBatch``
+        Batch of cells containing the desired data.
+    """
+    for cell in batch:
+        for cycle in cell:
+            try:
+                soe = cycle[soe_step][0]['Discharge_Energy(Wh)'][-1]/nom_e_cap
+            except IndexError:
+                # allow for cycles without a soe_step
+                soe = -1
+            try:
+                cycle[step]
+            except IndexError:
+                # allow for cycles without a step
+                continue
+            if not cycle[step]:
+                continue
+            for cycle_step in cycle[step]:
+                cycle_step.soe = soe
 
 def filter_by_soh(steps: list[ArbinStep] | dict[int: list[ArbinStep]], 
                   soh_range: float, 
@@ -220,9 +252,9 @@ def filter_by_soh(steps: list[ArbinStep] | dict[int: list[ArbinStep]],
         Width of SOH bins to sort ``steps`` into.
         If ``soh_range`` = 1 then ``steps`` will be sorted into bins
         from 77-78,78-79....,100-101 etc.
-    ``lower`` \: ``int``, optional
+    ``soh_lower`` \: ``int``, optional
         Lower SOH bound for sorting.
-    ``upper`` \: ``int``
+    ``soh_upper`` \: ``int``
         Upper SOH bound for sorting.
     
     Returns
@@ -247,6 +279,28 @@ def filter_by_temp(step: int,
                    temp_range: tuple | list, 
                    batch: ArbinBatch
                    ) -> dict[int: list[ArbinStep]]:
+    """
+    Filter steps in ``batch`` such that only the steps with a temperature within the bounds of 
+    ``temp_range`` are retained.
+
+    This function requires that all steps in ``steps`` have a temperature attribute; see 
+    ``assign_temp``.
+
+    Parameters
+    ----------
+    ``step`` \: ``int``
+        Step number in batch object that has the temperature attribute.
+    ``temp_range`` \: ``tuple | list``
+        Element zero is the lower temperature bound and element 1 is the upper temperature bound.
+    ``batch`` \: ``ArbinBatch``
+        ArbinBatch that contains the test data. See ``primed_data_processing`` package.
+
+    Returns
+    -------
+    ``dict[int: list[ArbinStep]]``
+        Dictionary with key of the cell channel number and values of list of 
+        step data within the temperature range.
+    """
     temp_filtered = {}
     for cell in batch:
         temp_filtered[cell.channel_number] = []
@@ -260,16 +314,26 @@ def filter_by_temp(step: int,
                 pass
     return temp_filtered
 
-def assign_cell_cycle_numbers(batch, step_idx=None):
+def assign_cell_cycle_numbers(batch: ArbinBatch, step_idx: int=None):
+    """
+    Assign cell and cycle numbers to the steps for ease of access when working with data.
+
+    Parameters
+    ----------
+    ``batch`` \: ``ArbinBatch``
+        ``ArbinBatch`` object containing the test data.
+    ``step_idx`` \: ``int``
+        Step number to assign cell and cycle numbers too.
+    """
     for cell in batch:
         for cycle in cell:
             if step_idx:
                 try:
-                    cycle[step]
+                    cycle[step_idx]
                 except IndexError:
                     # allow for cycles with no step
                     continue
-                for step in cycle[step]:
+                for step in cycle[step_idx]:
                     step.cell_number = cell.cell_number
                     step.channel_number = cell.channel_number
             else:
@@ -279,7 +343,30 @@ def assign_cell_cycle_numbers(batch, step_idx=None):
 
 ######################################################## GAMRY ######################################################
 
-def load_B6T10_eis(T10_eis_folder, T15_eis_folder, channel_numbers, cell_numbers) -> list[EisCell]:
+def load_B6T10_eis(T10_eis_folder: str, 
+                   T15_eis_folder: str, 
+                   channel_numbers: list | tuple, 
+                   cell_numbers: list | tuple
+                   ) -> list[EisCell]:
+    """
+    Load eis data from batch B6 and test 10 and 15 into a data object.
+
+    Parameters
+    ----------
+    ``T10_eis_folder`` \: ``str``
+        Absolute path to the folder containing test 10 eis data.
+    ``T15_eis_folder`` \: ``str``
+        Absolute path to the folder containing test 15 eis data.
+    ``channel_numbers`` \: ``list | tuple``
+        Iterable containing the channel numbers to be read into the data object.
+    ``cell_numbers`` \: ``list | tuple``
+        Iterable containing the cell numbers to be read into the data object.
+
+    Returns
+    -------
+    ``list[EisCell]``
+        List of ``EisCell`` objects for each cell in the folder directories.
+    """
     eis_cells = []
     for channel_idx, channel in enumerate(channel_numbers):
         cycle = 1
@@ -326,6 +413,22 @@ def assign_temp(eis_step: int,
                 default_step_idx: int=-1,
                 default_temp_idx: int=-1
                 ) -> None:
+    """
+    Assign cell temperature to the eis step from the temperature of ``temp_step``.
+
+    Parameters
+    ----------
+    ``eis_step`` \: ``int``
+        Step number of the eis step
+    ``temp_step`` \: ``int``
+        Step number of the step with temperature data.
+    ``batch`` \: ``ArbinBatch``
+        ``ArbinBatch`` object with the test data.
+    ``default_step_idx`` \: ``int``, optional
+        Index of the list of steps within the cycle. Default is -1.
+    ``default_temp_idx`` \: ``int``, optional
+        Index of the list of temperatures within the step. Default is -1.
+    """
     for cell in batch:
         for cycle in cell:
             try:
@@ -343,5 +446,16 @@ def assign_temp(eis_step: int,
                 step.temperature = temperature
 
 def get_first_quadrant_data(step: int, batch: ArbinBatch) -> None:
+    """
+    Make a dictionary containing only the first quadrant eis data.
+    See ``ArbinStep.make_first_quadrant_dict()``.
+
+    Parameters
+    ----------
+    ``step`` \: ``int``
+        Step number to get first quadrant data from.
+    ``batch`` \: ``ArbinBatch``
+        ``ArbinBatch`` object containing the test data.
+    """
     for step in batch[:,:,step]:
         step.make_first_quadrant_dict()

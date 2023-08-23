@@ -1,9 +1,9 @@
 import os
-import primed_utils
 os.chdir('..')
 print(os.getcwd())
 import pickle
 import numpy as np
+import primed_data_processing.primed_utils as primed_utils
 from primed_data_processing.arbin_cycler import ArbinBatch
 
 def open_data_file(cell_number, test_number):

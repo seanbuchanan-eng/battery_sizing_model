@@ -271,8 +271,8 @@ class BatterySimulator:
             #SOH Model
             time += timestep/3600 # time in hours
             # increment mean c-rate
-            if np.abs(I)/self.battery.cell_capacity_ah > 0.025: 
-                c_rate.append(np.abs(I)/self.battery.cell_capacity_ah)
+            # if np.abs(I)/self.battery.cell_capacity_ah > 0.025: 
+            c_rate.append(np.abs(I)/self.battery.cell_capacity_ah)
             # increment mean DOD
             self.deg_model.increment_dod(prev_soc, self.soc)
             # increment efc (total cumlative)

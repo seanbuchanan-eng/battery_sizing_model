@@ -6,3 +6,4 @@ data_objects/
 aggregate_params/
 cell_output.txt
 cell_output2.txt
+.vscode/

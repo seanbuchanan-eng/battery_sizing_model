@@ -23,23 +23,7 @@ def load_B6_test(cell_builder: CellBuilder,
                steps: dict[str: list[int]],
                insert_step: int
                ) -> ArbinBatch:
-    """
-    Load the entire B6T10/B6T15 or B6T11/B6T16 or B6T12/B6T17 dataset.
 
-    Parameters
-    ----------
-    ``cell_builder`` \: ``CellBuilder``
-        ``CellBuilder`` used to access data reading methods.
-    ``prepath`` \: ``str``
-        path to the folder containing all battery data.
-    ``channel_numbers`` \: ``list | tuple``
-        Channel numbers to be loaded.
-    ``cell_numbers`` \: ``list | tuple``
-        Cell number of channels to be loaded. Required to be
-        in order correspondin to the channel numbers.
-    ``steps`` \: ``dict[str: list[int]]``
-        Steps to be loaded.
-    """
     # list for holding processed cells
     arbin_cells = []
 
@@ -78,7 +62,12 @@ def load_B6_test(cell_builder: CellBuilder,
     return ArbinBatch(cells=arbin_cells)
 
 
-def read_data(channel_numbers, cell_numbers, cell_builder, raws_prepath, test_number):
+def read_data(channel_numbers: list | tuple, 
+              cell_numbers: list | tuple, 
+              cell_builder: CellBuilder, 
+              raws_prepath: str, 
+              test_number: int
+              ) -> None:
     for idx, channel in enumerate(channel_numbers):
         if test_number == 10:
             folder1 = "B6T10V0_1_2_3_4_9_10_11_12_13_14_15_16"

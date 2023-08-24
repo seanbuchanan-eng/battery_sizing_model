@@ -1,3 +1,13 @@
+"""
+This script calculates aggregate parameters used in the state of health 
+estimation model. The aggregate parameters are necessary to reduce the amount
+of data used, hence, the time needed for fitting of the state of health estimation
+model.
+
+It relies on ``save_batch_to_disk.py`` to be run first so that the data objects are
+available to be loaded into this script for processing.
+"""
+
 import os
 os.chdir('..')
 print(os.getcwd())

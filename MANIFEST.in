@@ -1,0 +1,1 @@
+include src/battery_sizing_model/lookup_tables/*.pkl

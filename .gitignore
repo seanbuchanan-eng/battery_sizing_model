@@ -8,3 +8,5 @@ cell_output.txt
 cell_output2.txt
 .vscode/
 build_docs/
+dist/
+battery_sizing_model.egg-info/

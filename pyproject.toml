@@ -18,5 +18,12 @@ dependencies = [
     "numpy>=1.24.1",
 ]
 
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = true
+where = ["src"]
+
 [project.urls]
 "Homepage" = "https://github.com/seanbuchanan-eng/battery_sizing_model"

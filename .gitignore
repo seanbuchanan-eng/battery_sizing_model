@@ -7,3 +7,4 @@ aggregate_params/
 cell_output.txt
 cell_output2.txt
 .vscode/
+build_docs/

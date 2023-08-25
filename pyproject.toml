@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "battery_sizing_model"
+version = "0.0.1"
+authors = [{name="Sean Buchanan", email="seanbuchanan55@hotmail.com"},]
+description = "A package for simulating microgrid level battery storage"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows :: Windows 11"
+]
+dependencies = [
+    "numpy>=1.24.1",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/seanbuchanan-eng/battery_sizing_model"

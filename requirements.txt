@@ -1,7 +1,0 @@
-numpy
-scipy
-jupyter
-matplotlib
-pandas
-ipympl
-openpyxl

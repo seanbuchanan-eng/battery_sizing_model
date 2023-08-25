@@ -3,6 +3,7 @@ This module contains all of the classes that represent distinct blocks
 within a battery simulation.
 """
 
+import os
 import pickle
 import numpy as np
 
@@ -89,11 +90,14 @@ class OCVTable:
     """
 
     def __init__(self) -> None:
-        with open('lookup_tables/charge_ocv.pkl', 'rb') as f:
+        this_dir, this_filename = os.path.split(__file__)
+        lookup_table_path = os.path.join(this_dir, "lookup_tables")
+        
+        with open(os.path.join(lookup_table_path, "charge_ocv.pkl"), 'rb') as f:
             self.charge_ocv = pickle.load(f)
-        with open('lookup_tables/discharge_ocv.pkl', 'rb') as f:
+        with open(os.path.join(lookup_table_path, "discharge_ocv.pkl"), 'rb') as f:
             self.discharge_ocv = pickle.load(f)
-        with open('lookup_tables/soc_interp_points.pkl', 'rb') as f:
+        with open(os.path.join(lookup_table_path, "soc_interp_points.pkl"), 'rb') as f:
             self.x = pickle.load(f)
 
     def get_charge_ocv(self, soh: float, soc: float) -> float:

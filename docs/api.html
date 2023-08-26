@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+<title>API Documentation | battery_sizing_model 0.0.1 documentation</title>
+<link href="_static/pygments.css" rel="stylesheet"/>
+<link href="_static/theme.39dcd091ff2d4f33bf46.css" rel="stylesheet"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="usage.html" rel="prev" title="Usage"/>
+</head>
+<body class="antialiased text-gray scroll-smooth">
+<div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#api-documentation" title="Skip navigation links">Skip to content</a>
+<header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
+<div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
+<button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
+<span class="sr-only">Open navigation menu</span>
+<svg aria-hidden="true" class="fill-current h-8 w-8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button><a class="hover:bg-gray-700 focus:bg-gray-700 focus:outline-none" href="index.html" title="Back to homepage"><span class="hidden lg:inline-block shrink-0 font-medium text-gray-100 mx-5 leading-14 tracking-wider">battery_sizing_model 0.0.1 documentation</span>
+</a></div><div class="flex justify-end items-center flex-1"><form action="search.html" class="flex print:hidden justify-between items-center leading-14 md:ml-4 bg-gray-dark text-gray-300 focus-within:bg-gray-50 focus-within:text-gray-800 focus-within:absolute focus-within:inset-x-0 focus-within:top-0 md:focus-within:w-full md:focus-within:static z-10" data-action="click-&gt;search#focusSearchInput" id="searchbox" method="get">
+<button aria-label="Get search results" class="text-inherit h-14 w-14" tabindex="-1">
+<svg aria-hidden="true" class="fill-current stroke-current h-8 w-8" stroke-width="0.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</button>
+<input aria-label="Search the docs" class="pr-2 bg-transparent text-inherit focus:outline-none w-0 md:w-auto focus:w-full transition-all duration-100" data-search-target="searchInput" id="search-input" name="q" placeholder="Search the docs" type="search"/>
+</form></div>
+</div>
+</header>
+<aside class="grid-area-sidebar h-full fixed pt-14 xl:relative inset-y-0 left-0 z-20 xl:z-0 print:hidden overflow-y-auto transition-all transform transform-gpu -translate-x-full opacity-0 duration-300 xl:translate-x-0 xl:opacity-100" data-sidebar-target="sidebar">
+<nav class="h-full overflow-y-auto bg-white text-gray-600 pt-8 flex flex-col" role="navigation">
+<div class="nav-toc flex-1 pl-6"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html">Installation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html#pypi">PyPI</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html#github">GitHub</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="usage.html">Usage</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="usage.html#background">Background</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="usage.html#running-a-simulation">Running a Simulation</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="usage.html#gotchas">Gotchas</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1 current expanded"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">API Documentation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="#module-battery_sizing_model.blocks">Blocks module</a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.Battery"><code class="docutils literal notranslate">Battery</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.BatterySimulator"><code class="docutils literal notranslate">BatterySimulator</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.CapacityError"><code class="docutils literal notranslate">CapacityError</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.DegradationModel"><code class="docutils literal notranslate">DegradationModel</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.ECM"><code class="docutils literal notranslate">ECM</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.OCVTable"><code class="docutils literal notranslate">OCVTable</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#battery_sizing_model.blocks.SOCIntegrator"><code class="docutils literal notranslate">SOCIntegrator</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
+<span class="sr-only">Close navigation menu</span>
+<svg aria-hidden="true" class="fill-current stroke-current h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</aside>
+<main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
+<a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="index.html">battery_sizing_model 0.0.1 documentation</a>
+<span class="mr-1">/</span><span aria-current="page">API Documentation</span>
+</nav>
+<article class="flex-1" role="main">
+<section id="api-documentation">
+<h1>API Documentation<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#api-documentation">¶</a></h1>
+<section id="module-battery_sizing_model.blocks">
+<span id="blocks-module"></span><h2>Blocks module<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#module-battery_sizing_model.blocks">¶</a></h2>
+<p>This module contains all of the classes that represent distinct blocks
+within a battery simulation.</p>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.Battery">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">Battery</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell_chemistry</span><span class="p">:</span><span class="w"> </span><span class="n">str</span></em>, <em class="sig-param"><span class="n">pack_capacity</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">pack_voltage</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">cell_discharge_energy_eff</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">cell_charge_energy_eff</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#Battery"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.Battery">¶</a></dt>
+<dd>
+<p>Represents a full battery pack of a single chemistry.</p>
+<section id="attributes">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#attributes">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">cell_chemistry</code> : <code class="docutils literal notranslate">str</code></dt><dd><p>Chemistry of the battery. Currently only supports NCA.</p>
+</dd>
+<dt><code class="docutils literal notranslate">pack_capacity</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Capacity of the pack in Watt-hours.</p>
+</dd>
+<dt><code class="docutils literal notranslate">pack_voltage</code> : <code class="docutils literal notranslate">float</code>, optional</dt><dd><p>Rated voltage of the pack, doesn’t have any bearing on the
+performance of the simulation. Default = 0.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_dishcarge_energy_eff</code> : <code class="docutils literal notranslate">float</code>, optional</dt><dd><p>Energy efficiency of the battery during discharge. Default = 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_charge_energy_eff</code> : <code class="docutils literal notranslate">float</code>, optional</dt><dd><p>Energy efficiency of the battery during charge. Default = 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_capacity_ah</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Cell capacity in Amp-hours.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_capacity_wh</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Cell capacity in Watt-hours.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_nom_voltage</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Nominal voltage of the cell.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cell_min_voltage</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Minimum voltage of the cell.</p>
+</dd>
+<dt><code class="docutils literal notranslate">price_per_kwh</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Estimated price_per_kwh of the cell chemistry.</p>
+</dd>
+<dt><code class="docutils literal notranslate">capital_cost</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Capital cost of the battery pack cells.</p>
+</dd>
+<dt><code class="docutils literal notranslate">num_series</code> : <code class="docutils literal notranslate">int</code></dt><dd><p>Calculated number of cells in series in the pack. Only valid
+if <code class="docutils literal notranslate">pack_voltage</code> &gt; 0.</p>
+</dd>
+<dt><code class="docutils literal notranslate">num_parallel</code> : <code class="docutils literal notranslate">int</code></dt><dd><p>Calculated number of cells in parallel in the pack.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.Battery.get_current">
+<code class="sig-name descname">get_current</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">power</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#Battery.get_current"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.Battery.get_current">¶</a></dt>
+<dd>
+<p>Calculates current in Amps from nominal voltage and input/output power.</p>
+<section id="parameters">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#parameters">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">power</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Input power signal for the battery at each step in the simulation.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#returns">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>Calculated cell current using the cell nominal voltage.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.BatterySimulator">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">BatterySimulator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ecm</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="#battery_sizing_model.blocks.ECM" title="battery_sizing_model.blocks.ECM">ECM</a></span></em>, <em class="sig-param"><span class="n">ocv</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="#battery_sizing_model.blocks.OCVTable" title="battery_sizing_model.blocks.OCVTable">OCVTable</a></span></em>, <em class="sig-param"><span class="n">integrator</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="#battery_sizing_model.blocks.SOCIntegrator" title="battery_sizing_model.blocks.SOCIntegrator">SOCIntegrator</a></span></em>, <em class="sig-param"><span class="n">deg_model</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="#battery_sizing_model.blocks.DegradationModel" title="battery_sizing_model.blocks.DegradationModel">DegradationModel</a></span></em>, <em class="sig-param"><span class="n">battery</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="#battery_sizing_model.blocks.Battery" title="battery_sizing_model.blocks.Battery">Battery</a></span></em>, <em class="sig-param"><span class="n">soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">soh</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#BatterySimulator"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.BatterySimulator">¶</a></dt>
+<dd>
+<p>Represents a simulation for a battery.</p>
+<section id="id1">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id1">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">ecm</code> : <code class="docutils literal notranslate">ECM</code></dt><dd><p>Equivalent circuit model object.</p>
+</dd>
+<dt><code class="docutils literal notranslate">ocv</code> : <code class="docutils literal notranslate">OCVTable</code></dt><dd><p>Open circuit voltgate lookup table object.</p>
+</dd>
+<dt><code class="docutils literal notranslate">integrator</code> : <code class="docutils literal notranslate">SOCIntegrator</code></dt><dd><p>State of charge integrator.</p>
+</dd>
+<dt><code class="docutils literal notranslate">deg_model</code> : <code class="docutils literal notranslate">DegradationModel</code></dt><dd><p>State of health estimation model.</p>
+</dd>
+<dt><code class="docutils literal notranslate">battery</code> : <code class="docutils literal notranslate">Battery</code></dt><dd><p>Battery object.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>State of charge at this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soh</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>State of health at this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">voltage</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Voltage at this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soh_i</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Beginning of life state of health.</p>
+</dd>
+<dt><code class="docutils literal notranslate">nom_cap</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Cell nominal capacity.</p>
+</dd>
+<dt><code class="docutils literal notranslate">voltage_result</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>Estimated voltage for every step in the simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">current_result</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>Calculated current for every step in the simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc_result</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>State of charge calculated at every step in the simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soh_result</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>State of health calculated every 340 hours of simulation.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.BatterySimulator.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">power</span><span class="p">:</span><span class="w"> </span><span class="n">list<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">timestep</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">validate</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">False</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#BatterySimulator.run"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.BatterySimulator.run">¶</a></dt>
+<dd>
+<p>Simulation loop that estimates battery state of health, state of charge,
+and voltage.</p>
+<section id="id2">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id2">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">power</code> : <code class="docutils literal notranslate">array[float]</code></dt><dd><p>Entire power signal for the battery with magnitudes on the pack level scale.
+Points are spaced out in time with a distance of <code class="docutils literal notranslate">timestep</code> between them.</p>
+</dd>
+<dt><code class="docutils literal notranslate">timestep</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Timestep of the simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">validate</code> : <code class="docutils literal notranslate">bool</code></dt><dd><p>Flag for turning off error checking to account for varying charge/discharge
+efficiencies in real life data.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+<dl class="py exception code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.CapacityError">
+<em class="property">exception<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">CapacityError</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">object</span></em>, <em class="sig-param"><span class="n">message</span><span class="o">=</span><span class="default_value">'State of charge is greater than the current state of health or less than 0.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#CapacityError"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.CapacityError">¶</a></dt>
+<dd>
+</dd></dl>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">DegradationModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ref_soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel">¶</a></dt>
+<dd>
+<p>Represents a model that predicts the battery SOH.</p>
+<section id="id3">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id3">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">model_params</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>Fitted coefficients for the model using molicel P42A cell data.</p>
+</dd>
+<dt><code class="docutils literal notranslate">dod</code> : <code class="docutils literal notranslate">list</code></dt><dd><p>Depth of discharge of every step in the simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">delta_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Change in state of charge between steps.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc_sign</code> : <code class="docutils literal notranslate">int</code></dt><dd><p>1 for positive change in state of charge. -1 for negative change in state of charge.</p>
+</dd>
+<dt><code class="docutils literal notranslate">ref_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Reference state of charge for the depth of discharge calculation.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc_chg</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Amount of charge added to the battery for each step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">cycle_chg</code> : <code class="docutils literal notranslate">int</code></dt><dd><p>Number of equivalent full cycles * 2.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel.get_dod">
+<code class="sig-name descname">get_dod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel.get_dod"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel.get_dod">¶</a></dt>
+<dd>
+<p>Getter for depth of discharge.</p>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel.get_efc">
+<code class="sig-name descname">get_efc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel.get_efc"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel.get_efc">¶</a></dt>
+<dd>
+<p>Getter for equivalent full cycles.</p>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel.increment_dod">
+<code class="sig-name descname">increment_dod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prev_soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">curr_soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel.increment_dod"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel.increment_dod">¶</a></dt>
+<dd>
+<p>Increments the depth of discharge based on the previoius and current soc.</p>
+<p>DOD is only calculated if the sign of the current changes.</p>
+<section id="id4">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id4">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">prev_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Previous steps state of charge.</p>
+</dd>
+<dt><code class="docutils literal notranslate">curr_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current steps state of charge.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel.increment_efc">
+<code class="sig-name descname">increment_efc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prev_soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">curr_soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel.increment_efc"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel.increment_efc">¶</a></dt>
+<dd>
+<p>Increments the equivalent full cycle value given the previous and current
+state of charge.</p>
+<p>An equivalent full cycle is counted when the battery has experienced enough 
+cumulative charge to fully charge or discharge the battery.</p>
+<section id="id5">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id5">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">prev_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Previous steps state of charge.</p>
+</dd>
+<dt><code class="docutils literal notranslate">curr_soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current steps state of charge.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.DegradationModel.model">
+<code class="sig-name descname">model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">efc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">c_rate</span><span class="p">:</span><span class="w"> </span><span class="n">list<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">dod</span><span class="p">:</span><span class="w"> </span><span class="n">list<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">soh_i</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#DegradationModel.model"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.DegradationModel.model">¶</a></dt>
+<dd>
+<p>State of health estimation model that estimates the state of health of the battery
+for a given time-period.</p>
+<section id="id6">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id6">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">efc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Equivalent full cycles, defined as the amount of charge needed to fully charge
+or discharge the battery. See <code class="docutils literal notranslate">increment_efc()</code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate">c_rate</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>C-rate for every soh estimation step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">dod</code> : <code class="docutils literal notranslate">list[float]</code></dt><dd><p>Depth of discharge for every soh estimation step. See <code class="docutils literal notranslate">increment_dod()</code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate">t</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Total time in hours that the battery has existed.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soh_i</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Beginning of life state of health of the battery.</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id7">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>Estimeated state of health for the given input parameters.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.ECM">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">ECM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_rc_pairs</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">R0</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="n">list<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">C</span><span class="p">:</span><span class="w"> </span><span class="n">list<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">timestep</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#ECM"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.ECM">¶</a></dt>
+<dd>
+<p>Represents an equivalent circuit model.</p>
+<p>This class is used for simulating a circuit given
+circuit parameters.</p>
+<p>Currently only supports multi-RC Randles circuits.</p>
+<section id="id8">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id8">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">r0</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Series resistance of the Randles circuit.</p>
+</dd>
+<dt><code class="docutils literal notranslate">R</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>Array of resistances in the RC pairs.</p>
+</dd>
+<dt><code class="docutils literal notranslate">C</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>Array of capacitances in the RC pairs.</p>
+</dd>
+<dt><code class="docutils literal notranslate">A_rc</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>State matrix for the circuit.</p>
+</dd>
+<dt><code class="docutils literal notranslate">B_rc</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>Control matrix for the circuit.</p>
+</dd>
+<dt><code class="docutils literal notranslate">I_rk</code> : <code class="docutils literal notranslate">numpy.array</code></dt><dd><p>Previous current estimate through the RC pairs.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.ECM.step">
+<code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">I_k</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">ocv</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#ECM.step"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.ECM.step">¶</a></dt>
+<dd>
+<p>Steps the circuit model forward one timestep.</p>
+<section id="id9">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id9">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">I_k</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current input for the this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">ocv</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Open circuit voltage from the ocv table.</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id10">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>Predicted battery voltage.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.OCVTable">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">OCVTable</code><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#OCVTable"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.OCVTable">¶</a></dt>
+<dd>
+<p>Represents an open circuit voltage lookup table.</p>
+<p>Currently only supports the molicel P42A cell (NCA).</p>
+<section id="id11">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id11">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">charge_ocv</code> : <code class="docutils literal notranslate">dict</code></dt><dd><p>Charge open circuit voltage indexed by state of health.</p>
+</dd>
+<dt><code class="docutils literal notranslate">discharge_ocv</code> : <code class="docutils literal notranslate">dict</code></dt><dd><p>Discharge open circuit voltage indexed by state of health.</p>
+</dd>
+<dt><code class="docutils literal notranslate">x</code> : <code class="docutils literal notranslate">array</code></dt><dd><p>Interpolation points for the lookup table.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.OCVTable.get_charge_ocv">
+<code class="sig-name descname">get_charge_ocv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">soh</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#OCVTable.get_charge_ocv"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.OCVTable.get_charge_ocv">¶</a></dt>
+<dd>
+<p>Gets the charge open circuit voltage from a lookup table.</p>
+<section id="id12">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id12">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">soh</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current state of health of the battery.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current state of charge of the battery.</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id13">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>Open circuit voltage from a lookup table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.OCVTable.get_discharge_ocv">
+<code class="sig-name descname">get_discharge_ocv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">soh</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">soc</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#OCVTable.get_discharge_ocv"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.OCVTable.get_discharge_ocv">¶</a></dt>
+<dd>
+<p>Gets the discharge open circuit voltage from a lookup table.</p>
+<section id="id14">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id14">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">soh</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current state of health of the battery.</p>
+</dd>
+<dt><code class="docutils literal notranslate">soc</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current state of charge of the battery.</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id15">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>Open circuit voltage from a lookup table.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+<dl class="py class code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.SOCIntegrator">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">battery_sizing_model.blocks.</code><code class="sig-name descname">SOCIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">charge_eff</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">discharge_eff</span><span class="p">:</span><span class="w"> </span><span class="n">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">validate</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#SOCIntegrator"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.SOCIntegrator">¶</a></dt>
+<dd>
+<p>Represents an integrator for counting couloumbs and calculating state of charge.</p>
+<section id="id16">
+<h3>Attributes<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id16">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">charge_eff</code> : <code class="docutils literal notranslate">float</code>, optional</dt><dd><p>Charge efficiency of the battery [0,1]. Default = 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate">discharge_eff</code> : <code class="docutils literal notranslate">float</code>, optional</dt><dd><p>Discharge efficiency of the battery [0,1]. Default = 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate">validate</code> : <code class="docutils literal notranslate">bool</code>, optional</dt><dd><p>Flag for indicating whether the sim should compensate for the
+varying charge/discharge efficiency in real data when validating.
+Default = False.</p>
+</dd>
+</dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="battery_sizing_model.blocks.SOCIntegrator.step">
+<code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">soc_k</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">timestep</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">I_k</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">nom_cap</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="_modules/battery_sizing_model/blocks.html#SOCIntegrator.step"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#battery_sizing_model.blocks.SOCIntegrator.step">¶</a></dt>
+<dd>
+<p>Integrate the current for this timestep.</p>
+<p>Assumes that current is constant over the sampling interval.</p>
+<section id="id17">
+<h4>Parameters<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id17">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">soc_k</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>State of charge of the previous step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">timestep</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Duration in time for this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">I_k</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Current for this step.</p>
+</dd>
+<dt><code class="docutils literal notranslate">nom_cap</code> : <code class="docutils literal notranslate">float</code></dt><dd><p>Nominal capacity of the battery.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h4>Returns<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id18">¶</a></h4>
+<dl class="simple">
+<dt><code class="docutils literal notranslate">float</code></dt><dd><p>State of charge from this step.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+</section>
+</dd></dl>
+</section>
+</section>
+</article>
+<footer>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, Sean Buchanan Made with <a href="https://www.sphinx-doc.org">Sphinx 6.1.3</a></div>
+</footer></main>
+<button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
+  Clear highlights
+</button><div class="fixed hidden inset-0 bg-black bg-opacity-50" data-action="click-&gt;sidebar#close" data-sidebar-target="screen">
+</div>
+</div>
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/sphinx_highlight.js"></script>
+<script src="_static/theme.b62e1ded0c8c099a2d47.js"></script>
+</body>
+</html>

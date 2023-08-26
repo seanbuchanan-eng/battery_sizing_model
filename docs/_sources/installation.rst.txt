@@ -1,0 +1,28 @@
+Installation
+============
+
+There are two ways to install the ``battery_sizing_model`` package.
+
+1. From PyPI through ``pip``.
+2. From GitHub so you can modify the source code.
+
+PyPI
+----
+
+To install from PyPI through ``pip`` simply run:
+
+.. code-block:: console
+
+    pip install battery_sizing_model
+
+GitHub
+------
+
+If you want to download the whole repo to make changes to the source code and have
+access to the data processing notebooks and scripts, clone or fork the 
+`repo <https://github.com/seanbuchanan-eng/battery_sizing_model>`_
+and then run ``pip install -r dev-requirements.txt`` in the directory containing the
+repository.
+
+It's recommended the installation process is performed in a virtual environment running
+Python 3.10+.

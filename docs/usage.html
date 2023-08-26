@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
+<title>Usage | battery_sizing_model 0.0.1 documentation</title>
+<link href="_static/pygments.css" rel="stylesheet"/>
+<link href="_static/theme.39dcd091ff2d4f33bf46.css" rel="stylesheet"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="api.html" rel="next" title="API Documentation"/>
+<link href="installation.html" rel="prev" title="Installation"/>
+</head>
+<body class="antialiased text-gray scroll-smooth">
+<div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#usage" title="Skip navigation links">Skip to content</a>
+<header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
+<div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
+<button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
+<span class="sr-only">Open navigation menu</span>
+<svg aria-hidden="true" class="fill-current h-8 w-8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button><a class="hover:bg-gray-700 focus:bg-gray-700 focus:outline-none" href="index.html" title="Back to homepage"><span class="hidden lg:inline-block shrink-0 font-medium text-gray-100 mx-5 leading-14 tracking-wider">battery_sizing_model 0.0.1 documentation</span>
+</a></div><div class="flex justify-end items-center flex-1"><form action="search.html" class="flex print:hidden justify-between items-center leading-14 md:ml-4 bg-gray-dark text-gray-300 focus-within:bg-gray-50 focus-within:text-gray-800 focus-within:absolute focus-within:inset-x-0 focus-within:top-0 md:focus-within:w-full md:focus-within:static z-10" data-action="click-&gt;search#focusSearchInput" id="searchbox" method="get">
+<button aria-label="Get search results" class="text-inherit h-14 w-14" tabindex="-1">
+<svg aria-hidden="true" class="fill-current stroke-current h-8 w-8" stroke-width="0.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</button>
+<input aria-label="Search the docs" class="pr-2 bg-transparent text-inherit focus:outline-none w-0 md:w-auto focus:w-full transition-all duration-100" data-search-target="searchInput" id="search-input" name="q" placeholder="Search the docs" type="search"/>
+</form></div>
+</div>
+</header>
+<aside class="grid-area-sidebar h-full fixed pt-14 xl:relative inset-y-0 left-0 z-20 xl:z-0 print:hidden overflow-y-auto transition-all transform transform-gpu -translate-x-full opacity-0 duration-300 xl:translate-x-0 xl:opacity-100" data-sidebar-target="sidebar">
+<nav class="h-full overflow-y-auto bg-white text-gray-600 pt-8 flex flex-col" role="navigation">
+<div class="nav-toc flex-1 pl-6"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html">Installation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html#pypi">PyPI</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="installation.html#github">GitHub</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1 current expanded"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">Usage</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#background">Background</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#running-a-simulation">Running a Simulation</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#gotchas">Gotchas</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html">API Documentation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#module-battery_sizing_model.blocks">Blocks module</a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.Battery"><code class="docutils literal notranslate">Battery</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.BatterySimulator"><code class="docutils literal notranslate">BatterySimulator</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.CapacityError"><code class="docutils literal notranslate">CapacityError</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.DegradationModel"><code class="docutils literal notranslate">DegradationModel</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.ECM"><code class="docutils literal notranslate">ECM</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.OCVTable"><code class="docutils literal notranslate">OCVTable</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="api.html#battery_sizing_model.blocks.SOCIntegrator"><code class="docutils literal notranslate">SOCIntegrator</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
+<span class="sr-only">Close navigation menu</span>
+<svg aria-hidden="true" class="fill-current stroke-current h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</aside>
+<main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
+<a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="index.html">battery_sizing_model 0.0.1 documentation</a>
+<span class="mr-1">/</span><span aria-current="page">Usage</span>
+</nav>
+<article class="flex-1" role="main">
+<section id="usage">
+<h1>Usage<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#usage">¶</a></h1>
+<section id="background">
+<h2>Background<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#background">¶</a></h2>
+<p>The general premise of the <code class="docutils literal notranslate">battery_sizing_model</code> package is a series of objects
+or “blocks” that are combined to create the battery simulation. The blocks that make
+up a simulation are the classes <a class="reference internal" href="api.html#battery_sizing_model.blocks.Battery" title="battery_sizing_model.blocks.Battery"><code class="xref py py-class docutils literal notranslate">Battery</code></a>,
+<a class="reference internal" href="api.html#battery_sizing_model.blocks.DegradationModel" title="battery_sizing_model.blocks.DegradationModel"><code class="xref py py-class docutils literal notranslate">DegradationModel</code></a>, <a class="reference internal" href="api.html#battery_sizing_model.blocks.ECM" title="battery_sizing_model.blocks.ECM"><code class="xref py py-class docutils literal notranslate">ECM</code></a>,
+<a class="reference internal" href="api.html#battery_sizing_model.blocks.SOCIntegrator" title="battery_sizing_model.blocks.SOCIntegrator"><code class="xref py py-class docutils literal notranslate">SOCIntegrator</code></a>, and
+<a class="reference internal" href="api.html#battery_sizing_model.blocks.OCVTable" title="battery_sizing_model.blocks.OCVTable"><code class="xref py py-class docutils literal notranslate">OCVTable</code></a>.</p>
+<p>The blocks are instantiated with whatever attributes or parameters necessary and then are combined
+into the <a class="reference internal" href="api.html#battery_sizing_model.blocks.BatterySimulator" title="battery_sizing_model.blocks.BatterySimulator"><code class="xref py py-class docutils literal notranslate">BatterySimulator</code></a> class.</p>
+</section>
+<section id="running-a-simulation">
+<h2>Running a Simulation<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#running-a-simulation">¶</a></h2>
+<p>To run a simulation a power series with some constant timestep must be provided
+and the simulation blocks must be created with their necessary parameters. An example
+is shown below:</p>
+<div class="code-wrapper" data-controller="code">
+<div class="code-header">
+<span class="code-lang">python</span></div>
+<div class="highlight"><pre><code><span class="c1"># import the package</span>
+<span class="kn">import</span> <span class="nn">battery_sizing_model.blocks</span> <span class="k">as</span> <span class="nn">blocks</span>
+
+<span class="c1"># declare the timestep</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="c1"># create an equivalent circuit block</span>
+<span class="n">ecm</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">ECM</span><span class="p">(</span>
+    <span class="n">num_rc_pairs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">R0</span><span class="o">=</span><span class="mf">0.00851</span><span class="p">,</span>
+    <span class="n">R</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25430794e-03</span><span class="p">,</span><span class="mf">2.75299761e-03</span><span class="p">,</span><span class="mf">2.17698493e-03</span><span class="p">],</span>
+    <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mf">1.65306594e+02</span><span class="p">,</span><span class="mf">1.57444756e-01</span><span class="p">,</span><span class="mf">1.42594864e+00</span><span class="p">],</span>
+    <span class="n">timestep</span><span class="o">=</span><span class="n">dt</span>
+    <span class="p">)</span>
+
+<span class="c1"># create an open circuit voltage lookup table block</span>
+<span class="n">ocv</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">OCVTable</span><span class="p">()</span>
+
+<span class="c1"># create a state of charge integrator block</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">SOCIntegrator</span><span class="p">()</span>
+
+<span class="c1"># create a SOH estimation model block</span>
+<span class="n">deg_model</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">DegradationModel</span><span class="p">()</span>
+
+<span class="c1"># create a Battery block</span>
+<span class="n">battery</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">Battery</span><span class="p">(</span>
+    <span class="n">cell_chemistry</span><span class="o">=</span><span class="s2">"NCA"</span><span class="p">,</span>
+    <span class="n">pack_capacity</span><span class="o">=</span><span class="mf">200e3</span><span class="p">,</span> <span class="c1"># Wh</span>
+    <span class="n">cell_charge_energy_eff</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+    <span class="n">cell_discharge_energy_eff</span><span class="o">=</span><span class="mf">0.9</span>
+    <span class="p">)</span>
+
+<span class="c1"># add the blocks to simulation instance</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">BatterySimulator</span><span class="p">(</span>
+    <span class="n">ecm</span><span class="o">=</span><span class="n">ecm</span><span class="p">,</span>
+    <span class="n">ocv</span><span class="o">=</span><span class="n">ocv</span><span class="p">,</span>
+    <span class="n">integrator</span><span class="o">=</span><span class="n">integrator</span><span class="p">,</span>
+    <span class="n">deg_model</span><span class="o">=</span><span class="n">deg_model</span><span class="p">,</span>
+    <span class="n">battery</span><span class="o">=</span><span class="n">battery</span><span class="p">,</span>
+    <span class="n">soc</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+<span class="c1"># run the simulation assuming that there is a power</span>
+<span class="c1"># series named ``power``</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">power</span><span class="o">=</span><span class="n">power</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+</code></pre></div></div>
+<p>A similar example is provided on GitHub in the <a class="reference external" href="https://github.com/seanbuchanan-eng/battery_sizing_model/blob/main/examples/battery_sim_example.ipynb" rel="nofollow noopener">examples section<svg aria-hidden="true" class="external-link-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></a>
+along with example data files for what the expected power series would be. For more information on attributes that can be set in
+the objects see the <a class="reference internal" href="api.html"><span class="doc">API Documentation</span></a>.</p>
+</section>
+<section id="gotchas">
+<h2>Gotchas<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#gotchas">¶</a></h2>
+<p>There are a few assumptions that were made during the development of this simulation model that need to be discussed.</p>
+<p>First, the <a class="reference internal" href="api.html#battery_sizing_model.blocks.Battery" title="battery_sizing_model.blocks.Battery"><code class="xref py py-class docutils literal notranslate">Battery</code></a> class converts the power signal to power series to a cell
+level current in Amps using the nominal cell voltage of the pack. The significance of this is that the currents at high
+voltages will be higher than real and the currents at low voltages will be lower than real. It’s a reasonable assumption
+to make; however, it needs to be understood when analyzing results like over or under voltage alarms.</p>
+<p>Second, the degradation model in the <a class="reference internal" href="api.html#battery_sizing_model.blocks.DegradationModel" title="battery_sizing_model.blocks.DegradationModel"><code class="xref py py-class docutils literal notranslate">DegradationModel</code></a> class is not strictly
+monotonically decreasing. If the input power series has long durations of differing mean DOD or mean SOC then the model
+may see a significant recovery in SOH that likely wouldn’t happen in real life. It is up to the user to recognize these
+situations and think critically about them. Improving this aspect of the model is something to be targeted in future work.</p>
+</section>
+</section>
+</article>
+<footer>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, Sean Buchanan Made with <a href="https://www.sphinx-doc.org">Sphinx 6.1.3</a></div>
+</footer></main>
+<button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
+  Clear highlights
+</button><div class="fixed hidden inset-0 bg-black bg-opacity-50" data-action="click-&gt;sidebar#close" data-sidebar-target="screen">
+</div>
+</div>
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/sphinx_highlight.js"></script>
+<script src="_static/theme.b62e1ded0c8c099a2d47.js"></script>
+</body>
+</html>

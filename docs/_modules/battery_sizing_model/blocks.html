@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<title>battery_sizing_model.blocks | battery_sizing_model 0.0.1 documentation</title>
+<link href="../../_static/pygments.css" rel="stylesheet"/>
+<link href="../../_static/theme.39dcd091ff2d4f33bf46.css" rel="stylesheet"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../../genindex.html" rel="index" title="Index"/>
+</head>
+<body class="antialiased text-gray scroll-smooth">
+<div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#battery-sizing-model-blocks" title="Skip navigation links">Skip to content</a>
+<header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
+<div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
+<button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
+<span class="sr-only">Open navigation menu</span>
+<svg aria-hidden="true" class="fill-current h-8 w-8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button><a class="hover:bg-gray-700 focus:bg-gray-700 focus:outline-none" href="../../index.html" title="Back to homepage"><span class="hidden lg:inline-block shrink-0 font-medium text-gray-100 mx-5 leading-14 tracking-wider">battery_sizing_model 0.0.1 documentation</span>
+</a></div><div class="flex justify-end items-center flex-1"><form action="../../search.html" class="flex print:hidden justify-between items-center leading-14 md:ml-4 bg-gray-dark text-gray-300 focus-within:bg-gray-50 focus-within:text-gray-800 focus-within:absolute focus-within:inset-x-0 focus-within:top-0 md:focus-within:w-full md:focus-within:static z-10" data-action="click-&gt;search#focusSearchInput" id="searchbox" method="get">
+<button aria-label="Get search results" class="text-inherit h-14 w-14" tabindex="-1">
+<svg aria-hidden="true" class="fill-current stroke-current h-8 w-8" stroke-width="0.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</button>
+<input aria-label="Search the docs" class="pr-2 bg-transparent text-inherit focus:outline-none w-0 md:w-auto focus:w-full transition-all duration-100" data-search-target="searchInput" id="search-input" name="q" placeholder="Search the docs" type="search"/>
+</form></div>
+</div>
+</header>
+<aside class="grid-area-sidebar h-full fixed pt-14 xl:relative inset-y-0 left-0 z-20 xl:z-0 print:hidden overflow-y-auto transition-all transform transform-gpu -translate-x-full opacity-0 duration-300 xl:translate-x-0 xl:opacity-100" data-sidebar-target="sidebar">
+<nav class="h-full overflow-y-auto bg-white text-gray-600 pt-8 flex flex-col" role="navigation">
+<div class="nav-toc flex-1 pl-6"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../installation.html">Installation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../installation.html#pypi">PyPI</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../installation.html#github">GitHub</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../usage.html">Usage</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../usage.html#background">Background</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../usage.html#running-a-simulation">Running a Simulation</a></div></li>
+<li class="toctree-l2"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../usage.html#gotchas">Gotchas</a></div></li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html">API Documentation</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#module-battery_sizing_model.blocks">Blocks module</a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.Battery"><code class="docutils literal notranslate">Battery</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.BatterySimulator"><code class="docutils literal notranslate">BatterySimulator</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.CapacityError"><code class="docutils literal notranslate">CapacityError</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.DegradationModel"><code class="docutils literal notranslate">DegradationModel</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.ECM"><code class="docutils literal notranslate">ECM</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.OCVTable"><code class="docutils literal notranslate">OCVTable</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../api.html#battery_sizing_model.blocks.SOCIntegrator"><code class="docutils literal notranslate">SOCIntegrator</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
+<span class="sr-only">Close navigation menu</span>
+<svg aria-hidden="true" class="fill-current stroke-current h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</aside>
+<main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
+<a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../../index.html">battery_sizing_model 0.0.1 documentation</a>
+<span class="mr-1">/</span><a class="text-gray-light text-sm hover:text-gray-dark" href="../index.html">Module code</a>
+<span class="mr-1">/</span><span aria-current="page">battery_sizing_model.blocks</span>
+</nav>
+<article class="flex-1" role="main">
+<h1>Source code for battery_sizing_model.blocks</h1><div class="highlight"><pre>
+<code><span class="sd">"""</span>
+<span class="sd">This module contains all of the classes that represent distinct blocks</span>
+<span class="sd">within a battery simulation.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="CapacityError"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.CapacityError">[docs]</a><span class="k">class</span> <span class="nc">CapacityError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> 
+                 <span class="n">message</span><span class="o">=</span><span class="s2">"State of charge is greater than the current state of health or less than 0."</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ECM"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.ECM">[docs]</a><span class="k">class</span> <span class="nc">ECM</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents an equivalent circuit model.</span>
+
+<span class="sd">    This class is used for simulating a circuit given</span>
+<span class="sd">    circuit parameters.</span>
+
+<span class="sd">    Currently only supports multi-RC Randles circuits.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``r0`` \: ``float``</span>
+<span class="sd">        Series resistance of the Randles circuit.</span>
+<span class="sd">    ``R`` \: ``numpy.array``</span>
+<span class="sd">        Array of resistances in the RC pairs.</span>
+<span class="sd">    ``C`` \: ``numpy.array``</span>
+<span class="sd">        Array of capacitances in the RC pairs.</span>
+<span class="sd">    ``A_rc`` \: ``numpy.array``</span>
+<span class="sd">        State matrix for the circuit.</span>
+<span class="sd">    ``B_rc`` \: ``numpy.array``</span>
+<span class="sd">        Control matrix for the circuit.</span>
+<span class="sd">    ``I_rk`` \: ``numpy.array``</span>
+<span class="sd">        Previous current estimate through the RC pairs.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_rc_pairs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">R0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">R</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">C</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">timestep</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">=</span> <span class="n">R0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A_rc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_rc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">I_rk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rc_pairs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">A_rc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">timestep</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">C</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">B_rc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">timestep</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">C</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="ECM.step"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.ECM.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I_k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ocv</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Steps the circuit model forward one timestep.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``I_k`` \: ``float``</span>
+<span class="sd">            Current input for the this step.</span>
+<span class="sd">        ``ocv`` \: ``float``</span>
+<span class="sd">            Open circuit voltage from the ocv table.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            Predicted battery voltage.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">I_rk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A_rc</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">I_rk</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">B_rc</span> <span class="o">*</span> <span class="n">I_k</span>
+        <span class="n">v_k</span> <span class="o">=</span> <span class="n">ocv</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">I_rk</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">*</span> <span class="n">I_k</span>
+        <span class="k">return</span> <span class="n">v_k</span></div></div>
+
+<div class="viewcode-block" id="OCVTable"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.OCVTable">[docs]</a><span class="k">class</span> <span class="nc">OCVTable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents an open circuit voltage lookup table.</span>
+
+<span class="sd">    Currently only supports the molicel P42A cell (NCA).</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``charge_ocv`` \: ``dict``</span>
+<span class="sd">        Charge open circuit voltage indexed by state of health.</span>
+<span class="sd">    ``discharge_ocv`` \: ``dict``</span>
+<span class="sd">        Discharge open circuit voltage indexed by state of health.</span>
+<span class="sd">    ``x`` \: ``array``</span>
+<span class="sd">        Interpolation points for the lookup table.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">this_dir</span><span class="p">,</span> <span class="n">this_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">lookup_table_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">this_dir</span><span class="p">,</span> <span class="s2">"lookup_tables"</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lookup_table_path</span><span class="p">,</span> <span class="s2">"charge_ocv.pkl"</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">charge_ocv</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lookup_table_path</span><span class="p">,</span> <span class="s2">"discharge_ocv.pkl"</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">discharge_ocv</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lookup_table_path</span><span class="p">,</span> <span class="s2">"soc_interp_points.pkl"</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<div class="viewcode-block" id="OCVTable.get_charge_ocv"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.OCVTable.get_charge_ocv">[docs]</a>    <span class="k">def</span> <span class="nf">get_charge_ocv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soh</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Gets the charge open circuit voltage from a lookup table.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``soh`` \: ``float``</span>
+<span class="sd">            Current state of health of the battery.</span>
+<span class="sd">        ``soc`` \: ``float``</span>
+<span class="sd">            Current state of charge of the battery.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            Open circuit voltage from a lookup table.</span>
+<span class="sd">        """</span>
+        <span class="n">soh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">soh</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="c1"># 0.96 because thats all the data we have available for the molicel battery</span>
+        <span class="k">if</span> <span class="n">soh</span> <span class="o">&gt;</span> <span class="mf">0.96</span><span class="p">:</span> <span class="n">soh</span> <span class="o">=</span> <span class="mf">0.96</span>
+        <span class="n">ocv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">soc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge_ocv</span><span class="p">[</span><span class="n">soh</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ocv</span></div>
+    
+<div class="viewcode-block" id="OCVTable.get_discharge_ocv"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.OCVTable.get_discharge_ocv">[docs]</a>    <span class="k">def</span> <span class="nf">get_discharge_ocv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soh</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Gets the discharge open circuit voltage from a lookup table.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``soh`` \: ``float``</span>
+<span class="sd">            Current state of health of the battery.</span>
+<span class="sd">        ``soc`` \: ``float``</span>
+<span class="sd">            Current state of charge of the battery.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            Open circuit voltage from a lookup table.</span>
+<span class="sd">        """</span>
+        <span class="n">soh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">soh</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="c1"># 0.96 because thats all the data we have available for the molicel battery</span>
+        <span class="k">if</span> <span class="n">soh</span> <span class="o">&gt;</span> <span class="mf">0.96</span><span class="p">:</span> <span class="n">soh</span> <span class="o">=</span> <span class="mf">0.96</span>
+        <span class="n">ocv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">soc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">discharge_ocv</span><span class="p">[</span><span class="n">soh</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ocv</span></div></div>
+
+<div class="viewcode-block" id="SOCIntegrator"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.SOCIntegrator">[docs]</a><span class="k">class</span> <span class="nc">SOCIntegrator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents an integrator for counting couloumbs and calculating state of charge.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``charge_eff`` \: ``float``, optional</span>
+<span class="sd">        Charge efficiency of the battery [0,1]. Default = 1.</span>
+<span class="sd">    ``discharge_eff`` \: ``float``, optional</span>
+<span class="sd">        Discharge efficiency of the battery [0,1]. Default = 1.</span>
+<span class="sd">    ``validate`` \: ``bool``, optional</span>
+<span class="sd">        Flag for indicating whether the sim should compensate for the</span>
+<span class="sd">        varying charge/discharge efficiency in real data when validating.</span>
+<span class="sd">        Default = False.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charge_eff</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">discharge_eff</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">charge_eff</span> <span class="o">=</span> <span class="n">charge_eff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discharge_eff</span> <span class="o">=</span> <span class="n">discharge_eff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span> <span class="o">=</span> <span class="n">validate</span>
+
+<div class="viewcode-block" id="SOCIntegrator.step"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.SOCIntegrator.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soc_k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">timestep</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">I_k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">nom_cap</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Integrate the current for this timestep.</span>
+
+<span class="sd">        Assumes that current is constant over the sampling interval.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``soc_k`` \: ``float``</span>
+<span class="sd">            State of charge of the previous step.</span>
+<span class="sd">        ``timestep`` \: ``float``</span>
+<span class="sd">            Duration in time for this step.</span>
+<span class="sd">        ``I_k`` \: ``float``</span>
+<span class="sd">            Current for this step.</span>
+<span class="sd">        ``nom_cap`` \: ``float``</span>
+<span class="sd">            Nominal capacity of the battery.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            State of charge from this step.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">I_k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">eff</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">discharge_eff</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge_eff</span>
+        <span class="n">soc_k</span> <span class="o">=</span> <span class="n">soc_k</span> <span class="o">+</span> <span class="p">(</span><span class="n">I_k</span> <span class="o">*</span> <span class="n">eff</span> <span class="o">*</span> <span class="n">timestep</span><span class="o">/</span><span class="mi">3600</span><span class="p">)</span> <span class="o">/</span> <span class="n">nom_cap</span>
+
+        <span class="c1"># Used to compensate for the varying charge/discharge efficiency</span>
+        <span class="c1"># in real data when validating the simulator.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span> <span class="ow">and</span> <span class="n">soc_k</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span> <span class="ow">and</span> <span class="n">soc_k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">soc_k</span></div></div>
+    
+<div class="viewcode-block" id="DegradationModel"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel">[docs]</a><span class="k">class</span> <span class="nc">DegradationModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents a model that predicts the battery SOH.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``model_params`` \: ``numpy.array``</span>
+<span class="sd">        Fitted coefficients for the model using molicel P42A cell data.</span>
+<span class="sd">    ``dod`` \: ``list``</span>
+<span class="sd">        Depth of discharge of every step in the simulation.</span>
+<span class="sd">    ``delta_soc`` \: ``float``</span>
+<span class="sd">        Change in state of charge between steps.</span>
+<span class="sd">    ``soc_sign`` \: ``int``</span>
+<span class="sd">        1 for positive change in state of charge. -1 for negative change in state of charge.</span>
+<span class="sd">    ``ref_soc`` \: ``float``</span>
+<span class="sd">        Reference state of charge for the depth of discharge calculation.</span>
+<span class="sd">    ``soc_chg`` \: ``float``</span>
+<span class="sd">        Amount of charge added to the battery for each step.</span>
+<span class="sd">    ``cycle_chg`` \: ``int``</span>
+<span class="sd">        Number of equivalent full cycles * 2.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_soc</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># model parameters determined from fitting to data.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.91441030e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.98808476e-03</span><span class="p">,</span>  
+                                      <span class="mf">3.09008644e-01</span><span class="p">,</span>  <span class="mf">2.80785041e+00</span><span class="p">,</span>
+                                      <span class="mf">6.12442315e-01</span><span class="p">,</span>  <span class="mf">1.00000000e-01</span><span class="p">,</span>  
+                                      <span class="mf">4.61330493e-01</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dod</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_soc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soc_sign</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref_soc</span> <span class="o">=</span> <span class="n">ref_soc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soc_chg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_chg</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="DegradationModel.model"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel.model">[docs]</a>    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">efc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">dod</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">soh_i</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        State of health estimation model that estimates the state of health of the battery</span>
+<span class="sd">        for a given time-period.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``efc`` \: ``float``</span>
+<span class="sd">            Equivalent full cycles, defined as the amount of charge needed to fully charge</span>
+<span class="sd">            or discharge the battery. See ``increment_efc()``.</span>
+<span class="sd">        ``c_rate`` \: ``list[float]``</span>
+<span class="sd">            C-rate for every soh estimation step.</span>
+<span class="sd">        ``dod`` \: ``list[float]``</span>
+<span class="sd">            Depth of discharge for every soh estimation step. See ``increment_dod()``.</span>
+<span class="sd">        ``t`` \: ``float``</span>
+<span class="sd">            Total time in hours that the battery has existed.</span>
+<span class="sd">        ``soh_i`` \: ``float``</span>
+<span class="sd">            Beginning of life state of health of the battery.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            Estimeated state of health for the given input parameters.</span>
+<span class="sd">        """</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">mean_c</span><span class="p">,</span> <span class="n">mean_dod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_window_means</span><span class="p">(</span><span class="n">c_rate</span><span class="p">,</span> <span class="n">dod</span><span class="p">)</span>
+        <span class="n">a_mean_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">mean_c</span><span class="p">)</span>
+        <span class="n">c_mean_dod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">mean_dod</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">soh_i</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">efc</span> <span class="o">*</span> <span class="p">(</span><span class="n">c_mean_dod</span> <span class="o">**</span> <span class="n">d</span> <span class="o">+</span> <span class="n">a_mean_c</span> <span class="o">**</span> <span class="n">e</span><span class="p">))</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">t</span> <span class="o">**</span> <span class="n">beta</span></div>
+    
+    <span class="k">def</span> <span class="nf">_get_window_means</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c_rate</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">dod</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Calculates the following window for the soh model.</span>
+<span class="sd">        </span>
+<span class="sd">        Assumes that c_rate and dod are the same length.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">         ``c_rate`` \: ``list[float]``</span>
+<span class="sd">            C-rate for every soh estimation step.</span>
+<span class="sd">        ``dod`` \: ``list[float]``</span>
+<span class="sd">            Depth of discharge for every soh estimation step. See ``increment_dod()``.</span>
+
+<span class="sd">        Returns </span>
+<span class="sd">        -------</span>
+<span class="sd">        ``tuple[list[float], list[float]]``</span>
+<span class="sd">            A tuple of the last four c-rates and dods.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_rate</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">c_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">dod_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_rate</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">c_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">dod_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_rate</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">c_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">dod_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">c_rate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">dod_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">dod</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">c_window</span><span class="p">,</span> <span class="n">dod_window</span>
+
+<div class="viewcode-block" id="DegradationModel.increment_dod"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel.increment_dod">[docs]</a>    <span class="k">def</span> <span class="nf">increment_dod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">curr_soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Increments the depth of discharge based on the previoius and current soc.</span>
+
+<span class="sd">        DOD is only calculated if the sign of the current changes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``prev_soc`` \: ``float``</span>
+<span class="sd">            Previous steps state of charge.</span>
+<span class="sd">        ``curr_soc`` \: ``float``</span>
+<span class="sd">            Current steps state of charge.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delta_soc</span> <span class="o">=</span> <span class="n">curr_soc</span> <span class="o">-</span> <span class="n">prev_soc</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delta_soc</span><span class="p">)</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soc_sign</span><span class="p">)</span>  
+            <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soc_sign</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">soc_sign</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dod</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">curr_soc</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_soc</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="DegradationModel.get_dod"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel.get_dod">[docs]</a>    <span class="k">def</span> <span class="nf">get_dod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Getter for depth of discharge.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dod</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dod</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dod</span></div>
+    
+<div class="viewcode-block" id="DegradationModel.increment_efc"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel.increment_efc">[docs]</a>    <span class="k">def</span> <span class="nf">increment_efc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">curr_soc</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Increments the equivalent full cycle value given the previous and current</span>
+<span class="sd">        state of charge.</span>
+
+<span class="sd">        An equivalent full cycle is counted when the battery has experienced enough </span>
+<span class="sd">        cumulative charge to fully charge or discharge the battery.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``prev_soc`` \: ``float``</span>
+<span class="sd">            Previous steps state of charge.</span>
+<span class="sd">        ``curr_soc`` \: ``float``</span>
+<span class="sd">            Current steps state of charge.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soc_chg</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">prev_soc</span> <span class="o">-</span> <span class="n">curr_soc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc_chg</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cycle_chg</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">soc_chg</span> <span class="o">=</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="DegradationModel.get_efc"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.DegradationModel.get_efc">[docs]</a>    <span class="k">def</span> <span class="nf">get_efc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Getter for equivalent full cycles.</span>
+<span class="sd">        """</span>
+        <span class="c1"># meant to be (charge cycles + discharge cycles)/2 but</span>
+        <span class="c1"># charge cycles and discharge cycles have been combined</span>
+        <span class="c1"># in increment_efc hence the / 2 here.</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycle_chg</span> <span class="o">/</span> <span class="mi">2</span></div></div>
+    
+<div class="viewcode-block" id="Battery"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.Battery">[docs]</a><span class="k">class</span> <span class="nc">Battery</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents a full battery pack of a single chemistry.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``cell_chemistry`` \: ``str``</span>
+<span class="sd">        Chemistry of the battery. Currently only supports NCA.</span>
+<span class="sd">    ``pack_capacity`` \: ``float``</span>
+<span class="sd">        Capacity of the pack in Watt-hours.</span>
+<span class="sd">    ``pack_voltage`` \: ``float``, optional</span>
+<span class="sd">        Rated voltage of the pack, doesn't have any bearing on the</span>
+<span class="sd">        performance of the simulation. Default = 0.</span>
+<span class="sd">    ``cell_dishcarge_energy_eff`` \: ``float``, optional</span>
+<span class="sd">        Energy efficiency of the battery during discharge. Default = 1.</span>
+<span class="sd">    ``cell_charge_energy_eff`` \: ``float``, optional</span>
+<span class="sd">        Energy efficiency of the battery during charge. Default = 1.</span>
+<span class="sd">    ``cell_capacity_ah`` \: ``float``</span>
+<span class="sd">        Cell capacity in Amp-hours.</span>
+<span class="sd">    ``cell_capacity_wh`` \: ``float``</span>
+<span class="sd">        Cell capacity in Watt-hours.</span>
+<span class="sd">    ``cell_nom_voltage`` \: ``float``</span>
+<span class="sd">        Nominal voltage of the cell.</span>
+<span class="sd">    ``cell_min_voltage`` \: ``float``</span>
+<span class="sd">        Minimum voltage of the cell.</span>
+<span class="sd">    ``price_per_kwh`` \: ``float``</span>
+<span class="sd">        Estimated price_per_kwh of the cell chemistry.</span>
+<span class="sd">    ``capital_cost`` \: ``float``</span>
+<span class="sd">        Capital cost of the battery pack cells.</span>
+<span class="sd">    ``num_series`` \: ``int``</span>
+<span class="sd">        Calculated number of cells in series in the pack. Only valid</span>
+<span class="sd">        if ``pack_voltage`` &gt; 0.</span>
+<span class="sd">    ``num_parallel`` \: ``int``</span>
+<span class="sd">        Calculated number of cells in parallel in the pack.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="n">cell_chemistry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">pack_capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="c1">#Wh</span>
+                 <span class="n">pack_voltage</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">cell_discharge_energy_eff</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">cell_charge_energy_eff</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack_capacity</span> <span class="o">=</span> <span class="n">pack_capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pack_voltage</span> <span class="o">=</span> <span class="n">pack_voltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell_discharge_energy_eff</span> <span class="o">=</span> <span class="n">cell_discharge_energy_eff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell_charge_energy_eff</span> <span class="o">=</span> <span class="n">cell_charge_energy_eff</span>
+        <span class="k">if</span> <span class="n">cell_chemistry</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"NCA"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_capacity_ah</span> <span class="o">=</span> <span class="mf">4.2</span> <span class="c1">#Ah</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_capacity_wh</span> <span class="o">=</span> <span class="mf">14.7</span> <span class="c1">#Wh</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_nom_voltage</span> <span class="o">=</span> <span class="mf">3.6</span> <span class="c1">#V</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_max_voltage</span> <span class="o">=</span> <span class="mf">4.2</span> <span class="c1">#V</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_min_voltage</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="c1">#V</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">price_per_kwh</span> <span class="o">=</span> <span class="mi">150</span> <span class="c1">#USD</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pack_capacity</span><span class="o">/</span><span class="mf">1e3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price_per_kwh</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cell_chemistry</span> <span class="o">=</span> <span class="n">cell_chemistry</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_voltage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_min_voltage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pack_capacity</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_capacity_wh</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="Battery.get_current"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.Battery.get_current">[docs]</a>    <span class="k">def</span> <span class="nf">get_current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Calculates current in Amps from nominal voltage and input/output power.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``power`` \: ``float``</span>
+<span class="sd">            Input power signal for the battery at each step in the simulation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``float``</span>
+<span class="sd">            Calculated cell current using the cell nominal voltage.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">power</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">power</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_nom_voltage</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_discharge_energy_eff</span>
+
+        <span class="k">return</span> <span class="n">power</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_parallel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_nom_voltage</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_charge_energy_eff</span></div></div>
+ 
+<div class="viewcode-block" id="BatterySimulator"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.BatterySimulator">[docs]</a><span class="k">class</span> <span class="nc">BatterySimulator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Represents a simulation for a battery.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ``ecm`` \: ``ECM``</span>
+<span class="sd">        Equivalent circuit model object.</span>
+<span class="sd">    ``ocv`` \: ``OCVTable``</span>
+<span class="sd">        Open circuit voltgate lookup table object.</span>
+<span class="sd">    ``integrator`` \: ``SOCIntegrator``</span>
+<span class="sd">        State of charge integrator.</span>
+<span class="sd">    ``deg_model`` \: ``DegradationModel``</span>
+<span class="sd">        State of health estimation model.</span>
+<span class="sd">    ``battery`` \: ``Battery``</span>
+<span class="sd">        Battery object.</span>
+<span class="sd">    ``soc`` \: ``float``</span>
+<span class="sd">        State of charge at this step.</span>
+<span class="sd">    ``soh`` \: ``float``</span>
+<span class="sd">        State of health at this step.</span>
+<span class="sd">    ``voltage`` \: ``float``</span>
+<span class="sd">        Voltage at this step.</span>
+<span class="sd">    ``soh_i`` \: ``float``</span>
+<span class="sd">        Beginning of life state of health.</span>
+<span class="sd">    ``nom_cap`` \: ``float``</span>
+<span class="sd">        Cell nominal capacity.</span>
+<span class="sd">    ``voltage_result`` \: ``list[float]``</span>
+<span class="sd">        Estimated voltage for every step in the simulation.</span>
+<span class="sd">    ``current_result`` \: ``list[float]``</span>
+<span class="sd">        Calculated current for every step in the simulation.</span>
+<span class="sd">    ``soc_result`` \: ``list[float]``</span>
+<span class="sd">        State of charge calculated at every step in the simulation.</span>
+<span class="sd">    ``soh_result`` \: ``list[float]``</span>
+<span class="sd">        State of health calculated every 340 hours of simulation.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                 <span class="n">ecm</span><span class="p">:</span> <span class="n">ECM</span><span class="p">,</span> 
+                 <span class="n">ocv</span><span class="p">:</span> <span class="n">OCVTable</span><span class="p">,</span> 
+                 <span class="n">integrator</span><span class="p">:</span> <span class="n">SOCIntegrator</span><span class="p">,</span>
+                 <span class="n">deg_model</span><span class="p">:</span> <span class="n">DegradationModel</span><span class="p">,</span>
+                 <span class="n">battery</span><span class="p">:</span> <span class="n">Battery</span><span class="p">,</span>
+                 <span class="n">soc</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                 <span class="n">soh</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voltage</span> <span class="o">=</span> <span class="n">ocv</span><span class="o">.</span><span class="n">get_discharge_ocv</span><span class="p">(</span><span class="n">soh</span><span class="p">,</span> <span class="n">soc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soc</span> <span class="o">=</span> <span class="n">soc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soh</span> <span class="o">=</span> <span class="n">soh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soh_i</span> <span class="o">=</span> <span class="n">soh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ecm</span> <span class="o">=</span> <span class="n">ecm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ocv</span> <span class="o">=</span> <span class="n">ocv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span> <span class="o">=</span> <span class="n">integrator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span> <span class="o">=</span> <span class="n">deg_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">battery</span> <span class="o">=</span> <span class="n">battery</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">ref_soc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soh</span><span class="o">/</span><span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nom_cap</span> <span class="o">=</span> <span class="n">battery</span><span class="o">.</span><span class="n">cell_capacity_ah</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voltage_result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soc_result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soh_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">soh</span><span class="p">]</span>
+
+<div class="viewcode-block" id="BatterySimulator.run"><a class="viewcode-back" href="../../api.html#battery_sizing_model.blocks.BatterySimulator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">timestep</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Simulation loop that estimates battery state of health, state of charge,</span>
+<span class="sd">        and voltage.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ``power`` \: ``array[float]``</span>
+<span class="sd">            Entire power signal for the battery with magnitudes on the pack level scale.</span>
+<span class="sd">            Points are spaced out in time with a distance of ``timestep`` between them.</span>
+<span class="sd">        ``timestep`` \: ``float``</span>
+<span class="sd">            Timestep of the simulation.</span>
+<span class="sd">        ``validate`` \: ``bool``</span>
+<span class="sd">            Flag for turning off error checking to account for varying charge/discharge</span>
+<span class="sd">            efficiencies in real life data.</span>
+<span class="sd">        """</span>
+        <span class="c1"># soh model data</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">mean_c</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mean_dod</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prev_soc</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">c_rate</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># event loop</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">power</span><span class="p">:</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">get_current</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+
+            <span class="c1"># ECM</span>
+            <span class="k">if</span> <span class="n">I</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ocv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ocv</span><span class="o">.</span><span class="n">get_charge_ocv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ocv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ocv</span><span class="o">.</span><span class="n">get_discharge_ocv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">voltage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ecm</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">ocv</span><span class="p">)</span>            
+            <span class="n">prev_soc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">soc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nom_cap</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">voltage_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voltage</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">soc_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soc</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">soh</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">validate</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CapacityError</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">voltage</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">cell_max_voltage</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">validate</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"WARNING: Maximum voltage exceeded! Voltage = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">voltage</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">voltage</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">cell_min_voltage</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">validate</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"WARNING: Minimum voltage exceeded! Voltage = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">voltage</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="c1">#SOH Model</span>
+            <span class="n">time</span> <span class="o">+=</span> <span class="n">timestep</span><span class="o">/</span><span class="mi">3600</span> <span class="c1"># time in hours</span>
+            <span class="c1"># increment mean c-rate</span>
+            <span class="n">c_rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">cell_capacity_ah</span><span class="p">)</span>
+            <span class="c1"># increment mean DOD</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">increment_dod</span><span class="p">(</span><span class="n">prev_soc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">)</span>
+            <span class="c1"># increment efc (total cumlative)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">increment_efc</span><span class="p">(</span><span class="n">prev_soc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soc</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">time</span> <span class="o">&gt;</span> <span class="mi">340</span><span class="p">:</span>
+                <span class="c1"># update mean c-rate for this time window</span>
+                <span class="n">mean_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c_rate</span><span class="p">))</span>
+                <span class="c1"># update mean DOD for this time window</span>
+                <span class="n">mean_dod</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">get_dod</span><span class="p">()))</span>
+                <span class="c1"># increment total cumlative time</span>
+                <span class="n">total_time</span> <span class="o">+=</span> <span class="n">time</span>
+                <span class="c1"># calculate current soh</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">soh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">get_efc</span><span class="p">(),</span> <span class="n">mean_c</span><span class="p">,</span> <span class="n">mean_dod</span><span class="p">,</span> <span class="n">total_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soh_i</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">ref_soc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">soh</span><span class="o">/</span><span class="mi">2</span>
+                <span class="c1"># start the next step</span>
+                <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">c_rate</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">deg_model</span><span class="o">.</span><span class="n">dod</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">soh_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soh</span><span class="p">)</span></div></div>
+</code></pre></div>
+</article>
+<footer>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, Sean Buchanan Made with <a href="https://www.sphinx-doc.org">Sphinx 6.1.3</a></div>
+</footer></main>
+<button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
+  Clear highlights
+</button><div class="fixed hidden inset-0 bg-black bg-opacity-50" data-action="click-&gt;sidebar#close" data-sidebar-target="screen">
+</div>
+</div>
+<script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+<script src="../../_static/doctools.js"></script>
+<script src="../../_static/sphinx_highlight.js"></script>
+<script src="../../_static/theme.b62e1ded0c8c099a2d47.js"></script>
+</body>
+</html>

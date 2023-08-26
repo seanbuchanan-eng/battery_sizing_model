@@ -26,4 +26,5 @@ namespaces = true
 where = ["src"]
 
 [project.urls]
-"Homepage" = "https://github.com/seanbuchanan-eng/battery_sizing_model"
+"repository" = "https://github.com/seanbuchanan-eng/battery_sizing_model"
+"documentation" = "https://seanbuchanan-eng.github.io/battery_sizing_model/"

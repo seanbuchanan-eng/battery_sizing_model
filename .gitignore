@@ -7,6 +7,6 @@ aggregate_params/
 cell_output.txt
 cell_output2.txt
 .vscode/
-build_docs/
+build_docs/build/
 dist/
 battery_sizing_model.egg-info/

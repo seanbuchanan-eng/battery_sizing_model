@@ -148,14 +148,20 @@ def get_soh_dict(batch):
     return soh
 
 if __name__ == '__main__':
-    cell_numbers = (9,10,11,12,1,2,3,4,5,6,7,8)
-    test_number = 1015
-    # cell_numbers = (10,)
+    cell_numbers = (9,10,11,12,1,2,3,4,5,6,7,8,13,16,14,15)
+    # test_number = 1015
     # cell_numbers = (13,16)
     # test_number = 1217
     # cell_numbers = (14,15)
     # test_number = 1116
     for cell_number in cell_numbers:
+        if cell_number in (9,10,11,12,1,2,3,4,5,6,7,8):
+            test_number = 1015
+        elif cell_number in (13,16):
+            test_number = 1217
+        elif cell_number in (14,15):
+            test_number = 1116
+
         batch = open_data_file(cell_number, test_number)
 
         efc, mean_c, dod, time = calc_fit_factors(batch)
